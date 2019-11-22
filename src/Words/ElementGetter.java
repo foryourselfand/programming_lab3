@@ -1,14 +1,13 @@
 package Words;
 
-import Words.ElementsFillers.ElementsFiller;
 import Words.IndexManipulators.IndexManipulator;
 
 public class ElementGetter {
 	private String[] elements;
 	private IndexManipulator indexManipulator;
 
-	public ElementGetter(ElementsFiller elementsFiller, IndexManipulator indexManipulator) {
-		this.elements = elementsFiller.getElements();
+	public ElementGetter(String[] elements, IndexManipulator indexManipulator) {
+		this.elements = elements;
 		this.indexManipulator = indexManipulator;
 	}
 

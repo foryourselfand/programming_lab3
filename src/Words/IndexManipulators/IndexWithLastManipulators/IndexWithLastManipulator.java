@@ -1,7 +1,7 @@
 package Words.IndexManipulators.IndexWithLastManipulators;
 
 import Words.IndexManipulators.IndexManipulator;
-import Words.IndexManipulators.FirstIndexManipulator;
+import Words.IndexManipulators.RandomIndexManipulator;
 
 public abstract class IndexWithLastManipulator extends IndexManipulator {
 	protected int lastIndex;
@@ -13,7 +13,7 @@ public abstract class IndexWithLastManipulator extends IndexManipulator {
 	}
 
 	public IndexWithLastManipulator() {
-		this(new FirstIndexManipulator());
+		this(new RandomIndexManipulator());
 	}
 
 	@Override
