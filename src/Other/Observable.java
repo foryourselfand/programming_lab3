@@ -1,3 +1,5 @@
+package Other;
+
 public interface Observable {
 	void registerObserver(Observer observer);
 

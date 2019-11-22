@@ -1,3 +1,5 @@
+package Other;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -30,4 +32,6 @@ public class Owl implements Observable {
 		this.message = message;
 		notifyObservers();
 	}
+
+
 }

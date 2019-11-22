@@ -1,3 +1,5 @@
+package Other;
+
 public class Him implements Observer {
 	private String message;
 	private Observable observable;
