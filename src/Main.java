@@ -1,5 +1,11 @@
 public class Main {
 	public static void main(String[] args) {
-		System.out.println("Hello World");
+		Owl owl = new Owl();
+
+		Him him = new Him(owl);
+
+		owl.setMessage("One");
+		owl.setMessage("Two");
+		owl.setMessage("Three");
 	}
 }
