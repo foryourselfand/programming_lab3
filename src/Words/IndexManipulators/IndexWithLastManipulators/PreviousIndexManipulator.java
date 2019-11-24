@@ -1,10 +1,8 @@
 package Words.IndexManipulators.IndexWithLastManipulators;
 
-import Words.IndexManipulators.IndexManipulator;
-
 public class PreviousIndexManipulator extends IndexWithLastManipulator {
-	public PreviousIndexManipulator(IndexManipulator startIndexManipulator) {
-		super(startIndexManipulator);
+	public PreviousIndexManipulator(int delay) {
+		super(delay);
 	}
 
 	public PreviousIndexManipulator() {
@@ -12,10 +10,10 @@ public class PreviousIndexManipulator extends IndexWithLastManipulator {
 	}
 
 	@Override
-	public int getIndex() {
-		int indexToReturn = lastIndex--;
-		if (lastIndex == -1)
-			lastIndex = maxIndex - 1;
-		return indexToReturn;
+	public int getIndex(int maxIndex) {
+		lastIndex -= (delay % maxIndex);
+		if (lastIndex < 0)
+			lastIndex = maxIndex + lastIndex;
+		return lastIndex;
 	}
 }

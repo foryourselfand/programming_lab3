@@ -1,25 +1,20 @@
 package Words.IndexManipulators.IndexWithLastManipulators;
 
 import Words.IndexManipulators.IndexManipulator;
-import Words.IndexManipulators.RandomIndexManipulator;
 
 public abstract class IndexWithLastManipulator extends IndexManipulator {
 	protected int lastIndex;
-	private IndexManipulator startIndexManipulator;
+	protected int delay;
 
-	public IndexWithLastManipulator(IndexManipulator startIndexManipulator) {
-		this.lastIndex = -1;
-		this.startIndexManipulator = startIndexManipulator;
+	public IndexWithLastManipulator(int delay) {
+		this.delay = delay;
 	}
 
 	public IndexWithLastManipulator() {
-		this(new RandomIndexManipulator());
+		this(1);
 	}
 
-	@Override
-	public int getIndex(int maxIndex) {
-		if (lastIndex == -1)
-			lastIndex = startIndexManipulator.getIndex(maxIndex);
-		return super.getIndex(maxIndex);
+	public void setLastIndex(IndexManipulator startIndexManipulator, int elements_length) {
+		this.lastIndex = startIndexManipulator.getIndex(elements_length);
 	}
 }

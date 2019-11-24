@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ElementsFillers {
-	public static final String[] NUMBERS = new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
+	public static final String[] NUMBERS = new String[]{"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
 
 	public static final String[] ENGLISH_VOWELS = new String[]{"a", "e", "i", "o", "u", "y"};
 	public static final String[] ENGLISH_CONSONANTS = new String[]{"b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "z"};
