@@ -1,7 +1,7 @@
 package Other;
 
 public interface Observable {
-	void registerObserver(Observer observer);
+	void addObserver(Observer observer);
 
 	void removeObserver(Observer observer);
 

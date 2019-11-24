@@ -1,3 +1,8 @@
+import Other.Displayers;
+import Other.Hims.HimMessandger;
+import Other.Owl;
+import Other.SequenseElementGetters.IncreasingSequenceGetter;
+import Other.SequenseElementGetters.SequenceElementGetter;
 import Words.ConditionFilters.RandomFilter.RandomFilter;
 import Words.ConditionFilters.RandomFilter.RandomHalfFilter;
 import Words.ConditionFilters.SequenseFilters.LessFilters.LessOrEqualsFilter;
@@ -8,18 +13,26 @@ import Words.ElementFormatters.UpperElementFormatter;
 import Words.ElementGetter;
 import Words.FullWordGetter;
 import Words.IndexManipulators.IndexWithoutLastManipulators.RandomIndexManipulator;
+import Words.WordsGetter;
 
 public class Main {
 	public static void main(String[] args) {
-//		Owl owl = new Owl();
-//		Him him = new Him(owl);
-//
-//		owl.setMessage("One");
-//		owl.setMessage("Two");
-//		owl.setMessage("Three");
+		Owl owl = new Owl();
+		Displayers displayers = new Displayers();
+
+		HimMessandger himMessandger = new HimMessandger(owl, displayers);
+
+		owl.setMessage("One");
+		displayers.displayAll();
+
+		owl.setMessage("Two");
+		displayers.displayAll();
+
+		owl.setMessage("Three");
+		displayers.displayAll();
 
 		ElementGetter wordGetter = new ElementGetter(
-				ElementFillers.RUSSIAN_ALPHABET_AND_SYLLABLES,
+				ElementFillers.ENGLISH_ALPHABET,
 				new RandomIndexManipulator(),
 				new UpperElementFormatter(new LessOrEqualsFilter(1)),
 				new ReverseElementFormatter(new RandomHalfFilter())
@@ -29,9 +42,12 @@ public class Main {
 				new MultiplyRandomElementsFormatter(new RandomFilter(0.3f), 3)
 		);
 		FullWordGetter fullWordGetter = new FullWordGetter(wordGetter, endingGetter);
-		for (int i = 2; i < 15; i++) {
-			String full_word = fullWordGetter.getWord(i);
-			System.out.println(full_word);
+
+		SequenceElementGetter increasingSequence = new IncreasingSequenceGetter(5);
+		WordsGetter wordsGetter = new WordsGetter(increasingSequence, fullWordGetter);
+		for (int i = 0; i < 10; i++) {
+			String fullWord = wordsGetter.getWord();
+			System.out.println(fullWord);
 		}
 	}
 }

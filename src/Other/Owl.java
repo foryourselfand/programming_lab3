@@ -12,7 +12,7 @@ public class Owl implements Observable {
 	}
 
 	@Override
-	public void registerObserver(Observer observer) {
+	public void addObserver(Observer observer) {
 		observers.add(observer);
 	}
 
@@ -23,9 +23,8 @@ public class Owl implements Observable {
 
 	@Override
 	public void notifyObservers() {
-		for (Observer observer : observers) {
+		for (Observer observer : observers)
 			observer.update(message);
-		}
 	}
 
 	public void setMessage(String message) {
