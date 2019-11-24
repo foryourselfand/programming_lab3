@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ElementsFillers {
-	public static final String[] NUMBERS = new String[]{"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
-
+public class ElementFillers {
 	public static final String[] ENGLISH_VOWELS = new String[]{"a", "e", "i", "o", "u", "y"};
 	public static final String[] ENGLISH_CONSONANTS = new String[]{"b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "z"};
 	public static final String[] ENGLISH_ALPHABET = merge(ENGLISH_VOWELS, ENGLISH_CONSONANTS);
@@ -18,6 +16,14 @@ public class ElementsFillers {
 	public static final String[] RUSSIAN_ALPHABET = merge(RUSSIAN_VOWELS, RUSSIAN_CONSONANTS);
 	public static final String[] RUSSIAN_SYLLABLES = new String[]{"аб", "ав", "аг", "ад", "аж", "аз", "ай", "ак", "ал", "ам", "ан", "ап", "ар", "ас", "ат", "ац", "ач", "аш", "еб", "ев", "ед", "еж", "ез", "ек", "ел", "ем", "ен", "еп", "ер", "ес", "ет", "ец", "еч", "ёл", "зи", "иб", "ив", "иг", "из", "ик", "ил", "им", "ин", "ир", "ис", "ит", "иц", "ич", "ищ", "об", "ов", "ог", "од", "оз", "ой", "ок", "ол", "ом", "он", "оп", "ор", "ос", "от", "ох", "оч", "уб", "ув", "уг", "уд", "уж", "уз", "ук", "ул", "ум", "ун", "уп", "ур", "ус", "ут", "ух", "уч", "уш", "ыв", "ыр", "юд", "юл", "юр", "ют", "яв", "яз", "ял", "ян", "яр", "яс", "ят", "яц", "ящ"};
 	public static final String[] RUSSIAN_ALPHABET_AND_SYLLABLES = merge(RUSSIAN_ALPHABET, RUSSIAN_SYLLABLES);
+
+	public static final String[] SYMBOLS_DEFAULT = new String[]{".", "!", "?"};
+	public static final String[] SYMBOLS_APPENDIX = new String[]{",", ":", ";", "-"};
+	public static final String[] SYMBOLS_BRACKETS = new String[]{"(", ")"};
+	public static final String[] SYMBOLS_ALL = merge(SYMBOLS_DEFAULT, SYMBOLS_APPENDIX);
+	public static final String[] SYMBOLS_ALL_BRACKETS = merge(SYMBOLS_ALL, SYMBOLS_BRACKETS);
+
+	public static final String[] NUMBERS = new String[]{"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
 
 
 	public static String[] merge(String[]... lists_input) {

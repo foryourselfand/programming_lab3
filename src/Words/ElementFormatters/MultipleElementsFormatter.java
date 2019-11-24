@@ -4,7 +4,7 @@ import Words.ConditionFilters.ConditionFilter;
 import Words.ConditionFilters.TrueFilter;
 
 public class MultipleElementsFormatter extends ElementFormatter {
-	private int multiplier;
+	protected int multiplier;
 
 	public MultipleElementsFormatter(ConditionFilter conditionFilter, int multiplier) {
 		super(conditionFilter);

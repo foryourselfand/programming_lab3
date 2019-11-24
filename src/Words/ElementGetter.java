@@ -68,4 +68,8 @@ public class ElementGetter {
 				element = elementFormatter.getFormattedElement(element);
 		return element;
 	}
+
+	public void reset() {
+		element_index = 0;
+	}
 }
