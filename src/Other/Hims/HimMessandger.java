@@ -15,11 +15,11 @@ public class HimMessandger extends Him {
 	}
 
 	public HimMessandger(Observable observable, Display display) {
-		this(observable, Breath.WEAKLY, display);
+		this(observable, Breath.STRONG, display);
 	}
 
 	public HimMessandger(Observable observable) {
-		this(observable, Breath.WEAKLY, new EmptyDisplay());
+		this(observable, Breath.STRONG, new EmptyDisplay());
 	}
 
 	@Override

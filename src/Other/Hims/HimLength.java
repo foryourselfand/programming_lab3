@@ -30,11 +30,11 @@ public class HimLength extends Him {
 	}
 
 	public HimLength(Observable observable, Display display) {
-		this(observable, Breath.WEAKLY, display);
+		this(observable, Breath.STRONG, display);
 	}
 
 	public HimLength(Observable observable) {
-		this(observable, Breath.WEAKLY, new PrintDisplay());
+		this(observable, Breath.STRONG, new PrintDisplay());
 	}
 
 	@Override
