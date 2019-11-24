@@ -1,7 +1,6 @@
 import Words.ElementGetter;
 import Words.ElementsFillers;
-import Words.IndexManipulators.FirstIndexManipulator;
-import Words.IndexManipulators.IndexWithLastManipulators.NextIndexManipulator;
+import Words.IndexManipulators.SpecialIndexManipulator;
 
 public class Main {
 	public static void main(String[] args) {
@@ -14,8 +13,7 @@ public class Main {
 
 		ElementGetter elementGetter = new ElementGetter(
 				ElementsFillers.NUMBERS,
-				new NextIndexManipulator(),
-				new FirstIndexManipulator());
+				new SpecialIndexManipulator(-1));
 
 		StringBuilder stringBuilder = new StringBuilder();
 		for (int i = 0; i < 21; i++) {
