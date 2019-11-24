@@ -11,6 +11,14 @@ public class MultipleElementsFormatter extends ElementFormatter {
 		this.multiplier = multiplier;
 	}
 
+	public MultipleElementsFormatter(int multiplier) {
+		this(new TrueFilter(), multiplier);
+	}
+
+	public MultipleElementsFormatter(ConditionFilter conditionFilter) {
+		this(conditionFilter, 1);
+	}
+
 	public MultipleElementsFormatter() {
 		this(new TrueFilter(), 1);
 	}

@@ -1,4 +1,6 @@
+import Words.ConditionFilters.SequenseFilters.GreaterFilters.GreaterOrEqualsFilter;
 import Words.ConditionFilters.SequenseFilters.LessFilters.LessFilter;
+import Words.ElementFormatters.ReverseElementFormatter;
 import Words.ElementFormatters.UpperElementFormatter;
 import Words.ElementGetter;
 import Words.ElementsFillers;
@@ -15,11 +17,12 @@ public class Main {
 //		owl.setMessage("Three");
 
 		ElementGetter elementGetter = new ElementGetter(
-				ElementsFillers.ENGLISH_ALPHABET,
+				ElementsFillers.ENGLISH_ALPHABET_AND_SYLLABLES,
 				new NextIndexManipulator(), new FirstIndexManipulator(),
-				new UpperElementFormatter(new LessFilter(100)));
+				new UpperElementFormatter(new LessFilter(5)));
+
 		StringBuilder stringBuilder = new StringBuilder();
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 20; i++) {
 			String element = elementGetter.getElement();
 			stringBuilder.append(element);
 		}
