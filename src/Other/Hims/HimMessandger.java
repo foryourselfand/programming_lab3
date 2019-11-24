@@ -1,20 +1,33 @@
 package Other.Hims;
 
-import Other.Displayers;
+import Other.Breath;
+import Other.Displays.Display;
+import Other.Displays.EmptyDisplay;
 import Other.Observable;
 
 public class HimMessandger extends Him {
-	public HimMessandger(Observable observable, Displayers displayers) {
-		super(observable, displayers);
+	public HimMessandger(Observable observable, Breath breath, Display display) {
+		super(observable, breath, display);
+	}
+
+	public HimMessandger(Observable observable, Breath breath) {
+		this(observable, breath, new EmptyDisplay());
+	}
+
+	public HimMessandger(Observable observable, Display display) {
+		this(observable, Breath.WEAKLY, display);
+	}
+
+	public HimMessandger(Observable observable) {
+		this(observable, Breath.WEAKLY, new EmptyDisplay());
 	}
 
 	@Override
-	public void update(String message) {
-		super.update(message);
+	public void updateByMessage(String message) {
 	}
 
 	@Override
-	public String display() {
-		return "Message: " + lastMessage;
+	public String getDisplayableMessage() {
+		return "Сообщение: " + lastMessage;
 	}
 }
