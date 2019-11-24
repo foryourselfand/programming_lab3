@@ -7,6 +7,8 @@ import Other.Displays.PrintDisplay;
 import Other.Observable;
 import Other.Observer;
 
+import java.util.Arrays;
+
 public abstract class Him implements Observer, Displayable {
 	protected String lastMessage;
 	private Display display;
@@ -43,5 +45,31 @@ public abstract class Him implements Observer, Displayable {
 
 	public void breathe() {
 		display.display("Он вздыхает " + breath.getStrength());
+	}
+
+	@Override
+	public boolean equals(Object object) {
+		if (this == object)
+			return true;
+		if (object == null)
+			return false;
+		if (this.getClass() != object.getClass())
+			return false;
+		Him him = (Him) object;
+		return this.lastMessage.equals(him.lastMessage) && this.display == him.display && this.breath == him.breath;
+	}
+
+	@Override
+	public int hashCode() {
+		return Arrays.deepHashCode(new Object[]{lastMessage, display, breath});
+	}
+
+	@Override
+	public String toString() {
+		return "Him{" +
+				"lastMessage='" + lastMessage + '\'' +
+				", display=" + display +
+				", breath=" + breath +
+				'}';
 	}
 }

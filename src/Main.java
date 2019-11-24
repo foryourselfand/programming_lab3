@@ -45,5 +45,8 @@ public class Main {
 		String firstMessage = owl.getFirstMessage();
 		System.out.println("Первое сообщение: " + firstMessage);
 		owl.announceTheReader();
+
+//		System.out.println(owl);
+		System.out.println(himLength);
 	}
 }
