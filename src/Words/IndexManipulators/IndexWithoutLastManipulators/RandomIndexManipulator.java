@@ -1,6 +1,7 @@
-package Words.IndexManipulators;
+package Words.IndexManipulators.IndexWithoutLastManipulators;
 
 import Utils.RandomHolder;
+import Words.IndexManipulators.IndexManipulator;
 
 public class RandomIndexManipulator extends IndexManipulator {
 	@Override

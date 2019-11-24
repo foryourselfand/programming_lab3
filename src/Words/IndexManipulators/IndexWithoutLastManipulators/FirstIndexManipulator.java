@@ -1,4 +1,6 @@
-package Words.IndexManipulators;
+package Words.IndexManipulators.IndexWithoutLastManipulators;
+
+import Words.IndexManipulators.IndexManipulator;
 
 public class FirstIndexManipulator extends IndexManipulator {
 	@Override
