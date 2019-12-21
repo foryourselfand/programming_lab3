@@ -3,13 +3,13 @@ package Utils;
 import java.util.Random;
 
 public class RandomHolder {
-	public Random random;
 	private static RandomHolder instance;
-
+	public Random random;
+	
 	private RandomHolder() {
 		random = new Random();
 	}
-
+	
 	public static RandomHolder getInstance() {
 		if (instance == null)
 			instance = new RandomHolder();

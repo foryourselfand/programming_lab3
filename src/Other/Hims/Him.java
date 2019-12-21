@@ -2,8 +2,8 @@ package Other.Hims;
 
 import Other.Breath;
 import Other.Displayable;
-import Other.Displays.Display;
-import Other.Displays.PrintDisplay;
+import Other.Monitors.Monitor;
+import Other.Monitors.MonitorPrint;
 import Other.Observable;
 import Other.Observer;
 
@@ -11,41 +11,43 @@ import java.util.Arrays;
 
 public abstract class Him implements Observer, Displayable {
 	protected String lastMessage;
-	private Display display;
+	private Monitor monitor;
 	private Breath breath;
-
-	public Him(Observable observable, Breath breath, Display display) {
+	private Displayable displayableBreath;
+	
+	public Him(Observable observable, Breath breath, Monitor monitor) {
 		observable.addObserver(this);
 		this.breath = breath;
-		this.display = display;
+		this.monitor = monitor;
+		this.displayableBreath = new DisplayableBreath();
 		breathe();
 	}
-
+	
 	public Him(Observable observable, Breath breath) {
-		this(observable, breath, new PrintDisplay());
+		this(observable, breath, new MonitorPrint());
 	}
-
-	public Him(Observable observable, Display display) {
-		this(observable, Breath.STRONG, display);
+	
+	public Him(Observable observable, Monitor monitor) {
+		this(observable, Breath.STRONG, monitor);
 	}
-
+	
 	public Him(Observable observable) {
-		this(observable, Breath.STRONG, new PrintDisplay());
+		this(observable, Breath.STRONG, new MonitorPrint());
 	}
-
+	
 	@Override
 	public void update(String message) {
 		lastMessage = message;
 		updateByMessage(message);
-		display.display(getDisplayableMessage());
+		monitor.display(this);
 	}
-
+	
 	public abstract void updateByMessage(String message);
-
+	
 	public void breathe() {
-		display.display("Он вздыхает " + breath.getStrength());
+		this.monitor.display(this.displayableBreath);
 	}
-
+	
 	@Override
 	public boolean equals(Object object) {
 		if (this == object)
@@ -55,20 +57,27 @@ public abstract class Him implements Observer, Displayable {
 		if (this.getClass() != object.getClass())
 			return false;
 		Him him = (Him) object;
-		return this.lastMessage.equals(him.lastMessage) && this.display == him.display && this.breath == him.breath;
+		return this.lastMessage.equals(him.lastMessage) && this.monitor == him.monitor && this.breath == him.breath;
 	}
-
+	
 	@Override
 	public int hashCode() {
-		return Arrays.deepHashCode(new Object[]{lastMessage, display, breath});
+		return Arrays.deepHashCode(new Object[]{lastMessage, monitor, breath});
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Him{" +
 				"lastMessage='" + lastMessage + '\'' +
-				", display=" + display +
+				", display=" + monitor +
 				", breath=" + breath +
 				'}';
+	}
+	
+	private class DisplayableBreath implements Displayable {
+		@Override
+		public String getDisplayableMessage() {
+			return "Вздыхает: " + breath.getStrength();
+		}
 	}
 }

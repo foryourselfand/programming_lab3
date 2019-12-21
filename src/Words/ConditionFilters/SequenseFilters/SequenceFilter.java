@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 public abstract class SequenceFilter extends ConditionFilter {
 	protected int[] numbers;
-
+	
 	public SequenceFilter(int... numbers) {
 		if (numbers.length == 0)
 			throw new IllegalArgumentException();

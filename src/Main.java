@@ -1,6 +1,6 @@
-import Other.Displays.Display;
-import Other.Displays.EmptyDisplay;
-import Other.Displays.PrintDisplay;
+import Other.Monitors.Monitor;
+import Other.Monitors.MonitorNothing;
+import Other.Monitors.MonitorPrint;
 import Other.Hims.HimLength;
 import Other.Hims.HimMessandger;
 import Other.Owl;
@@ -19,11 +19,15 @@ import Words.WordsGetter;
 public class Main {
 	public static void main(String[] args) {
 		Owl owl = new Owl();
-
-		Display printDisplay = new PrintDisplay();
-		HimMessandger himMessandger = new HimMessandger(owl, printDisplay);
-		HimLength himLength = new HimLength(owl, new EmptyDisplay());
-
+		
+		Monitor printMonitor = new MonitorPrint();
+		HimMessandger himMessandger = new HimMessandger(owl, printMonitor);
+		
+		System.out.println("Flag");
+		System.out.println(himMessandger.getDisplayableMessage());
+		
+		HimLength himLength = new HimLength(owl, new MonitorNothing());
+		
 		ElementGetter wordGetter = new ElementGetter(
 				ElementFillers.RUSSIAN_ALPHABET,
 				new RandomIndexManipulator(),
@@ -33,20 +37,19 @@ public class Main {
 		ElementGetter endingGetter = new ElementGetter(
 				ElementFillers.SYMBOLS_DEFAULT);
 		FullWordGetter fullWordGetter = new FullWordGetter(wordGetter, endingGetter);
-
+		
 		SequenceElementGetter increasingSequence = new IncreasingSequenceGetter(5);
 		WordsGetter wordsGetter = new WordsGetter(increasingSequence, fullWordGetter);
 		for (int i = 0; i < 10; i++) {
 			String fullWord = wordsGetter.getWord();
 			owl.addMessage(fullWord);
 		}
-		printDisplay.display(himLength.getDisplayableMessage());
-
+		printMonitor.display(himLength);
+		
 		String firstMessage = owl.getFirstMessage();
 		System.out.println("Первое сообщение: " + firstMessage);
 		owl.announceTheReader();
-
-//		System.out.println(owl);
+		
 		System.out.println(himLength);
 	}
 }
