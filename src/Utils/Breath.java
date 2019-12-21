@@ -1,4 +1,4 @@
-package Other;
+package Utils;
 
 public enum Breath {
 	WEAKLY("Слабо"),
@@ -12,6 +12,6 @@ public enum Breath {
 	}
 	
 	public String getStrength() {
-		return strength;
+		return this.strength;
 	}
 }

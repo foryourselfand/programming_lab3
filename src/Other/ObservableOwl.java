@@ -6,48 +6,50 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Owl implements Observable {
+public class ObservableOwl implements Observable {
 	private List<Observer> observers;
 	private List<String> messages;
+	private String lastMessage;
 	private String[] readers;
 	
-	public Owl(String[] readers) {
+	public ObservableOwl(String[] readers) {
 		this.observers = new LinkedList<>();
 		this.messages = new LinkedList<>();
 		this.readers = readers;
 	}
 	
-	public Owl() {
+	public ObservableOwl() {
 		this(new String[]{"Кристофер Робин"});
 	}
 	
 	@Override
 	public void addObserver(Observer observer) {
-		observers.add(observer);
+		this.observers.add(observer);
 	}
 	
 	@Override
 	public void removeObserver(Observer observer) {
-		observers.remove(observer);
+		this.observers.remove(observer);
 	}
 	
 	@Override
 	public void notifyObservers() {
-		for (Observer observer : observers)
-			observer.update(messages.get(messages.size() - 1));
+		for (Observer observer : this.observers)
+			observer.update(this.lastMessage);
 	}
 	
 	public void addMessage(String message) {
 		this.messages.add(message);
-		notifyObservers();
+		this.lastMessage = message;
+		this.notifyObservers();
 	}
 	
 	public String getFirstMessage() {
 		return messages.get(0);
 	}
 	
-	public void announceTheReader() {
-		String randomReader = readers[RandomHolder.getInstance().random.nextInt(readers.length)];
+	public void announceReader() {
+		String randomReader = readers[RandomHolder.getInstance().random.nextInt(this.readers.length)];
 		System.out.format("Читать объявление будет: %s\n", randomReader);
 	}
 	
@@ -59,21 +61,21 @@ public class Owl implements Observable {
 			return false;
 		if (this.getClass() != object.getClass())
 			return false;
-		Owl owl = (Owl) object;
-		return this.observers == owl.observers && this.messages == owl.messages && this.readers == owl.readers;
+		ObservableOwl other = (ObservableOwl) object;
+		return this.observers == other.observers && this.messages == other.messages && this.readers == other.readers;
 	}
 	
 	@Override
 	public int hashCode() {
-		return Arrays.deepHashCode(new Object[]{observers, messages, readers});
+		return Arrays.deepHashCode(new Object[]{this.observers, this.messages, this.readers});
 	}
 	
 	@Override
 	public String toString() {
-		return "Owl{" +
-				"observers=" + observers +
-				", messages=" + messages +
-				", readers=" + Arrays.toString(readers) +
+		return "ObservableOwl{" +
+				"observers=" + this.observers +
+				", messages=" + this.messages +
+				", readers=" + Arrays.toString(this.readers) +
 				'}';
 	}
 }

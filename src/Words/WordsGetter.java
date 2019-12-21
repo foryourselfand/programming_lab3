@@ -1,6 +1,6 @@
 package Words;
 
-import Other.SequenseElementGetters.SequenceElementGetter;
+import Utils.SequenceElementGetter;
 
 public class WordsGetter {
 	private SequenceElementGetter sequenceElementGetter;

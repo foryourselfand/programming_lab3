@@ -6,13 +6,17 @@ public class RandomHolder {
 	private static RandomHolder instance;
 	public Random random;
 	
+	private RandomHolder(long seed) {
+		this.random = new Random(seed);
+	}
+	
 	private RandomHolder() {
-		random = new Random();
+		this(new Random().nextLong());
 	}
 	
 	public static RandomHolder getInstance() {
-		if (instance == null)
-			instance = new RandomHolder();
-		return instance;
+		if (RandomHolder.instance == null)
+			RandomHolder.instance = new RandomHolder();
+		return RandomHolder.instance;
 	}
 }

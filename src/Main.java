@@ -1,11 +1,9 @@
+import Utils.Breath;
 import Other.Monitors.Monitor;
-import Other.Monitors.MonitorNothing;
 import Other.Monitors.MonitorPrint;
-import Other.Hims.HimLength;
-import Other.Hims.HimMessandger;
-import Other.Owl;
-import Other.SequenseElementGetters.IncreasingSequenceGetter;
-import Other.SequenseElementGetters.SequenceElementGetter;
+import Other.ObservableOwl;
+import Utils.SequenceElementGetter;
+import Other.ObserverWinnieThePooh;
 import Words.ConditionFilters.RandomFilter.RandomHalfFilter;
 import Words.ConditionFilters.SequenseFilters.LessFilters.LessOrEqualsFilter;
 import Words.ElementFillers;
@@ -18,15 +16,12 @@ import Words.WordsGetter;
 
 public class Main {
 	public static void main(String[] args) {
-		Owl owl = new Owl();
+		ObservableOwl observableOwl = new ObservableOwl();
 		
-		Monitor printMonitor = new MonitorPrint();
-		HimMessandger himMessandger = new HimMessandger(owl, printMonitor);
-		
-		System.out.println("Flag");
-		System.out.println(himMessandger.getDisplayableMessage());
-		
-		HimLength himLength = new HimLength(owl, new MonitorNothing());
+		Monitor monitorPrint = new MonitorPrint();
+		ObserverWinnieThePooh observerWinnieThePooh = new ObserverWinnieThePooh(observableOwl, Breath.STRONG, monitorPrint);
+		ObserverWinnieThePooh.MonitorMessage observerWinnieThePoohMonitorMessage = observerWinnieThePooh.new MonitorMessage(observableOwl);
+		ObserverWinnieThePooh.Length observerWinnieThePoohMonitorLength = observerWinnieThePooh.new Length(observableOwl);
 		
 		ElementGetter wordGetter = new ElementGetter(
 				ElementFillers.RUSSIAN_ALPHABET,
@@ -38,18 +33,15 @@ public class Main {
 				ElementFillers.SYMBOLS_DEFAULT);
 		FullWordGetter fullWordGetter = new FullWordGetter(wordGetter, endingGetter);
 		
-		SequenceElementGetter increasingSequence = new IncreasingSequenceGetter(5);
+		SequenceElementGetter increasingSequence = new SequenceElementGetter.Increasing(5);
 		WordsGetter wordsGetter = new WordsGetter(increasingSequence, fullWordGetter);
 		for (int i = 0; i < 10; i++) {
 			String fullWord = wordsGetter.getWord();
-			owl.addMessage(fullWord);
+			observableOwl.addMessage(fullWord);
 		}
-		printMonitor.display(himLength);
 		
-		String firstMessage = owl.getFirstMessage();
-		System.out.println("Первое сообщение: " + firstMessage);
-		owl.announceTheReader();
-		
-		System.out.println(himLength);
+		String firstMessage = observableOwl.getFirstMessage();
+		monitorPrint.display("Первое сообщение: " + firstMessage);
+		observableOwl.announceReader();
 	}
 }
