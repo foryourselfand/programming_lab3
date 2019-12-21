@@ -9,7 +9,6 @@ import java.util.List;
 public class ObservableOwl implements Observable {
 	private List<Observer> observers;
 	private List<String> messages;
-	private String lastMessage;
 	private String[] readers;
 	
 	public ObservableOwl(String[] readers) {
@@ -34,18 +33,22 @@ public class ObservableOwl implements Observable {
 	
 	@Override
 	public void notifyObservers() {
+		String lastMessage = this.getLastMessage();
 		for (Observer observer : this.observers)
-			observer.update(this.lastMessage);
+			observer.update(lastMessage);
 	}
 	
 	public void addMessage(String message) {
 		this.messages.add(message);
-		this.lastMessage = message;
 		this.notifyObservers();
 	}
 	
 	public String getFirstMessage() {
-		return messages.get(0);
+		return this.messages.get(0);
+	}
+	
+	public String getLastMessage() {
+		return this.messages.get(this.messages.size() - 1);
 	}
 	
 	public void announceReader() {

@@ -1,6 +1,6 @@
-package Other.Monitors;
+package Utils.Monitors;
 
-import Other.Displayable;
+import Utils.Displayable;
 
 public abstract class Monitor {
 	public abstract void display(Displayable displayable);

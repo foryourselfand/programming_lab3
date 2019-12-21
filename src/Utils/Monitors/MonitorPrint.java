@@ -1,6 +1,6 @@
-package Other.Monitors;
+package Utils.Monitors;
 
-import Other.Displayable;
+import Utils.Displayable;
 
 public class MonitorPrint extends Monitor {
 	@Override
@@ -10,5 +10,6 @@ public class MonitorPrint extends Monitor {
 	
 	@Override
 	public void display(String message) {
+		System.out.println(message);
 	}
 }

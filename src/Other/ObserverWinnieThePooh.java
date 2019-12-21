@@ -1,8 +1,9 @@
 package Other;
 
-import Other.Monitors.Monitor;
-import Other.Monitors.MonitorPrint;
 import Utils.Breath;
+import Utils.Displayable;
+import Utils.Monitors.Monitor;
+import Utils.Monitors.MonitorPrint;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -97,23 +98,17 @@ public final class ObserverWinnieThePooh implements Observer, Displayable {
 		}
 	}
 	
-	public class Length implements Observer, Displayable {
-		private boolean[] flags;
+	private abstract class FlagsHolder implements Observer, Displayable {
+		protected boolean[] flags;
+		protected int previousPattern;
 		private int previousLength;
-		private int previousPattern;
-		private HashMap<Integer, String> patternToName;
 		
-		public Length(Observable observable) {
+		public FlagsHolder(Observable observable) {
 			observable.addObserver(this);
 			
 			flags = new boolean[3];
 			previousLength = - 1;
 			previousPattern = 42;
-			
-			patternToName = new HashMap<>();
-			patternToName.put(- 1, "меньше предыдущего");
-			patternToName.put(0, "равен предыдущему");
-			patternToName.put(1, "больше предыдущего");
 		}
 		
 		@Override
@@ -134,19 +129,54 @@ public final class ObserverWinnieThePooh implements Observer, Displayable {
 		@Override
 		public String getDisplayableMessage() {
 			if (previousPattern == 42)
-				return "Последовательность из единственного элемента.";
-			return getCurrentState() + getAllState();
+				return getMessageForFirstElementSituation();
+			return getMessage();
 		}
 		
-		private String getCurrentState() {
+		public abstract String getMessageForFirstElementSituation();
+		
+		public abstract String getMessage();
+	}
+	
+	public class Length extends FlagsHolder {
+		private HashMap<Integer, String> patternToName;
+		
+		public Length(Observable observable) {
+			super(observable);
+			
+			patternToName = new HashMap<>();
+			patternToName.put(- 1, "меньше предыдущего");
+			patternToName.put(0, "равен предыдущему");
+			patternToName.put(1, "больше предыдущего");
+		}
+		
+		@Override
+		public String getMessageForFirstElementSituation() {
+			return "Добавленный элемент не с чем сравнивать.";
+		}
+		
+		@Override
+		public String getMessage() {
 			String currentState = patternToName.get(previousPattern);
 			return "Добавленный элемент " +
 					currentState +
 					".";
 		}
+	}
+	
+	public class Sequence extends FlagsHolder {
+		public Sequence(Observable observable) {
+			super(observable);
+		}
 		
-		private String getAllState() {
-			StringBuilder allStateBuilder = new StringBuilder(" Последовательность ");
+		@Override
+		public String getMessageForFirstElementSituation() {
+			return "Последовательность из единственного элемента.";
+		}
+		
+		@Override
+		public String getMessage() {
+			StringBuilder allStateBuilder = new StringBuilder("Последовательность ");
 			if (flags[0] && flags[2])
 				allStateBuilder.append("чередующаяся");
 			else if (flags[0] || flags[2]) {
