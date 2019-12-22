@@ -7,12 +7,8 @@ import Utils.Monitors.MonitorPrint;
 import Utils.SequenceElementGetter;
 import Words.ConditionFilters.RandomFilter.RandomHalfFilter;
 import Words.ConditionFilters.SequenseFilters.LessFilters.LessOrEqualsFilter;
-import Words.ElementFillers;
-import Words.ElementFormatters.ElementFormatter;
-import Words.ElementGetter;
-import Words.FullWordGetter;
-import Words.IndexManipulators.IndexWithoutLastManipulators.RandomIndexManipulator;
-import Words.WordsGetter;
+import Words.*;
+import Words.IndexManipulators.IndexManipulator;
 
 import java.util.List;
 
@@ -33,7 +29,7 @@ public class Main {
 		
 		ElementGetter wordGetter = new ElementGetter(
 				ElementFillers.RUSSIAN.ALPHABET,
-				new RandomIndexManipulator(),
+				new IndexManipulator.Random(),
 				new ElementFormatter.Upper(new LessOrEqualsFilter(1)),
 				new ElementFormatter.Reverse(new RandomHalfFilter())
 		);

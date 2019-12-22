@@ -1,9 +1,6 @@
 package Words;
 
-import Words.ElementFormatters.ElementFormatter;
 import Words.IndexManipulators.IndexManipulator;
-import Words.IndexManipulators.IndexWithLastManipulators.IndexWithLastManipulator;
-import Words.IndexManipulators.IndexWithoutLastManipulators.RandomIndexManipulator;
 
 public class ElementGetter {
 	private String[] elements;
@@ -21,7 +18,7 @@ public class ElementGetter {
 	}
 	
 	public ElementGetter(String[] elements, ElementFormatter... elementFormatters) {
-		this(elements, new RandomIndexManipulator(), elementFormatters);
+		this(elements, new IndexManipulator.Random(), elementFormatters);
 	}
 	
 	public ElementGetter(String[] elements, IndexManipulator indexManipulator) {
@@ -29,33 +26,33 @@ public class ElementGetter {
 	}
 	
 	public ElementGetter(String[] elements) {
-		this(elements, new RandomIndexManipulator(), new ElementFormatter.Default());
+		this(elements, new IndexManipulator.Random(), new ElementFormatter.Default());
 	}
 	
-	public ElementGetter(String[] elements, IndexWithLastManipulator indexWithLastManipulator, IndexManipulator startIndexManipulator, ElementFormatter... elementFormatters) {
-		this(elements, indexWithLastManipulator, elementFormatters);
-		setStartIndexManipulator(startIndexManipulator);
+	public ElementGetter(String[] elements, IndexManipulator.WithLast indexManipulatorWithLast, IndexManipulator indexManipulatorStart, ElementFormatter... elementFormatters) {
+		this(elements, indexManipulatorWithLast, elementFormatters);
+		setStartIndexManipulator(indexManipulatorStart);
 	}
 	
-	public ElementGetter(String[] elements, IndexWithLastManipulator indexWithLastManipulator, IndexManipulator startIndexManipulator) {
-		this(elements, indexWithLastManipulator);
-		setStartIndexManipulator(startIndexManipulator);
+	public ElementGetter(String[] elements, IndexManipulator.WithLast indexManipulatorWithLast, IndexManipulator indexManipulatorStart) {
+		this(elements, indexManipulatorWithLast);
+		setStartIndexManipulator(indexManipulatorStart);
 	}
 	
-	public ElementGetter(String[] elements, IndexWithLastManipulator indexWithLastManipulator, ElementFormatter... elementFormatters) {
-		this(elements, (IndexManipulator) indexWithLastManipulator, elementFormatters);
-		setStartIndexManipulator(new RandomIndexManipulator());
+	public ElementGetter(String[] elements, IndexManipulator.WithLast indexManipulatorWithLast, ElementFormatter... elementFormatters) {
+		this(elements, (IndexManipulator) indexManipulatorWithLast, elementFormatters);
+		setStartIndexManipulator(new IndexManipulator.Random());
 	}
 	
-	public ElementGetter(String[] elements, IndexWithLastManipulator indexWithLastManipulator) {
+	public ElementGetter(String[] elements, IndexManipulator.WithLast indexWithLastManipulator) {
 		this(elements, (IndexManipulator) indexWithLastManipulator);
-		setStartIndexManipulator(new RandomIndexManipulator());
+		setStartIndexManipulator(new IndexManipulator.Random());
 	}
 	
-	public void setStartIndexManipulator(IndexManipulator startIndexManipulator) {
-		if (indexManipulator instanceof IndexWithLastManipulator) {
-			IndexWithLastManipulator indexWithLastManipulator = (IndexWithLastManipulator) indexManipulator;
-			indexWithLastManipulator.setLastIndex(startIndexManipulator, elements.length);
+	public void setStartIndexManipulator(IndexManipulator indexManipulatorStart) {
+		if (indexManipulator instanceof IndexManipulator.WithLast) {
+			IndexManipulator.WithLast indexWithLastManipulator = (IndexManipulator.WithLast) indexManipulator;
+			indexWithLastManipulator.setLastIndex(indexManipulatorStart, elements.length);
 		}
 	}
 	

@@ -1,4 +1,4 @@
-package Words.ElementFormatters;
+package Words;
 
 import Utils.RandomHolder;
 import Words.ConditionFilters.ConditionFilter;
@@ -154,7 +154,7 @@ public abstract class ElementFormatter {
 		}
 	}
 	
-	private static abstract class Append extends ElementFormatter {
+	public static abstract class Append extends ElementFormatter {
 		protected String elementAppended;
 		
 		public Append(ConditionFilter conditionFilter, String elementAppended) {
