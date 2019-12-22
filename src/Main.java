@@ -34,9 +34,18 @@ public class Main {
 				ElementFiller.RUSSIAN.ALPHABET,
 				(index)->RandomHolder.getInstance().random.nextInt(index),
 				new ElementFormatter(String::toUpperCase, index->index <= 1),
-				new ElementFormatter(element->new StringBuilder(element).reverse().toString(), index->true));
+				new ElementFormatter(element->new StringBuilder(element).reverse().toString(), index->true)
+		);
+		
 		ElementGetter endingGetter = new ElementGetter(
-				ElementFiller.SYMBOLS.DEFAULT
+				ElementFiller.SYMBOLS.DEFAULT,
+				new ElementFormatter(element->{
+					StringBuilder stringBuilder = new StringBuilder(element);
+					int multiplier = RandomHolder.getInstance().random.nextInt(2) + 1;
+					for (int i = 0; i < multiplier; i++)
+						stringBuilder.append(")");
+					return stringBuilder.toString();
+				}, (index)->true)
 		);
 		
 		FullWordGetter fullWordGetter = new FullWordGetter(wordGetter, endingGetter);
