@@ -2,31 +2,31 @@ package Words;
 
 import Utils.RandomHolder;
 
-public abstract class IndexManipulator {
-	abstract public int getIndex(int maxIndex);
+public interface IndexManipulator {
+	int getIndex(int maxIndex);
 	
-	public static class First extends IndexManipulator {
+	class First implements IndexManipulator {
 		@Override
 		public int getIndex(int maxIndex) {
 			return 0;
 		}
 	}
 	
-	public static class Last extends IndexManipulator {
+	class Last implements IndexManipulator {
 		@Override
 		public int getIndex(int maxIndex) {
 			return maxIndex - 1;
 		}
 	}
 	
-	public static class Random extends IndexManipulator {
+	class Random implements IndexManipulator {
 		@Override
 		public int getIndex(int maxIndex) {
 			return RandomHolder.getInstance().random.nextInt(maxIndex);
 		}
 	}
 	
-	public static class Special extends IndexManipulator {
+	class Special implements IndexManipulator {
 		private int specialIndex;
 		
 		public Special(int specialIndex) {
@@ -41,7 +41,7 @@ public abstract class IndexManipulator {
 		}
 	}
 	
-	public static abstract class WithLast extends IndexManipulator {
+	abstract class WithLast implements IndexManipulator {
 		protected int lastIndex;
 		protected int delay;
 		
@@ -58,7 +58,7 @@ public abstract class IndexManipulator {
 		}
 	}
 	
-	public static class Next extends WithLast {
+	class Next extends WithLast {
 		public Next(int delay) {
 			super(delay);
 		}
@@ -76,7 +76,7 @@ public abstract class IndexManipulator {
 		}
 	}
 	
-	public static class Previous extends WithLast {
+	class Previous extends WithLast {
 		public Previous(int delay) {
 			super(delay);
 		}

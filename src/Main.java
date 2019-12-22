@@ -4,12 +4,14 @@ import Other.ObserverWinnieThePooh;
 import Utils.Breath;
 import Utils.Monitors.Monitor;
 import Utils.Monitors.MonitorPrint;
+import Utils.RandomHolder;
 import Utils.SequenceElementGetter;
 import Words.Concrete.FullWordGetter;
 import Words.Concrete.WordsGetter;
 import Words.ConditionFilter;
-import Words.*;
-import Words.IndexManipulator;
+import Words.ElementFiller;
+import Words.ElementFormatter;
+import Words.ElementGetter;
 
 import java.util.List;
 
@@ -31,9 +33,9 @@ public class Main {
 		
 		ElementGetter wordGetter = new ElementGetter(
 				ElementFiller.RUSSIAN.ALPHABET,
-				new IndexManipulator.Random(),
+				(index)->RandomHolder.getInstance().random.nextInt(index),
 				new ElementFormatter.Upper(new ConditionFilter.Sequence.LessOrEquals(1)),
-				new ElementFormatter.Reverse(new ConditionFilter.Random.Half())
+				new ElementFormatter.Reverse(index -> 0.5f <= RandomHolder.getInstance().random.nextFloat())
 		);
 		ElementGetter endingGetter = new ElementGetter(
 				ElementFiller.SYMBOLS.DEFAULT
