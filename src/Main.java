@@ -33,7 +33,7 @@ public class Main {
 		ElementGetter wordGetter = new ElementGetter(
 				ElementFiller.RUSSIAN.ALPHABET,
 				(index)->RandomHolder.getInstance().random.nextInt(index),
-				new ElementFormatter(String::toUpperCase, index->true),
+				new ElementFormatter(String::toUpperCase, index->index <= 1),
 				new ElementFormatter(element->new StringBuilder(element).reverse().toString(), index->true));
 		ElementGetter endingGetter = new ElementGetter(
 				ElementFiller.SYMBOLS.DEFAULT
