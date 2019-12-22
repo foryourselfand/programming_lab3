@@ -21,11 +21,9 @@ public class ElementFormatter {
 		this(element->element, index->true);
 	}
 	
-	public StringFormatter getStringFormatter() {
-		return stringFormatter;
-	}
-	
-	public ConditionFilter getConditionFilter() {
-		return conditionFilter;
+	public String getFormattedElement(int index, String element) {
+		if (conditionFilter.condition(index))
+			return stringFormatter.getFormattedString(element);
+		return element;
 	}
 }

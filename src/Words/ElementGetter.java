@@ -60,8 +60,7 @@ public class ElementGetter implements Resettable {
 		element_index++;
 		String element = elements[indexManipulator.getIndex(this.elements.length)];
 		for (ElementFormatter elementFormatter : elementFormatters)
-			if (elementFormatter.getConditionFilter().condition(element_index))
-				element = elementFormatter.getStringFormatter().getFormattedString(element);
+			element = elementFormatter.getFormattedElement(element_index, element);
 		return element;
 	}
 	
