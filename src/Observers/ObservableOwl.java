@@ -1,25 +1,18 @@
 package Observers;
 
-import Utils.RandomHolder;
+import Utils.Resettable;
 
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-public class ObservableOwl implements Observable {
+public class ObservableOwl implements Observable, Resettable {
 	private List<Observer> observers;
 	private List<String> messages;
-	private String[] readers;
-	
-	public ObservableOwl(String[] readers) {
-		this.readers = readers;
-		
-		this.observers = new LinkedList<>();
-		this.messages = new LinkedList<>();
-	}
 	
 	public ObservableOwl() {
-		this(new String[]{"Кристофер Робин"});
+		this.observers = new LinkedList<>();
+		this.messages = new LinkedList<>();
 	}
 	
 	@Override
@@ -44,6 +37,10 @@ public class ObservableOwl implements Observable {
 		return observers;
 	}
 	
+	public List<String> getMessages() {
+		return messages;
+	}
+	
 	public void addMessage(String message) {
 		this.messages.add(message);
 		this.notifyObservers();
@@ -57,9 +54,9 @@ public class ObservableOwl implements Observable {
 		return this.messages.get(this.messages.size() - 1);
 	}
 	
-	public void announceReader() {
-		String randomReader = readers[RandomHolder.getInstance().random.nextInt(this.readers.length)];
-		System.out.format("Читать объявление будет: %s\n", randomReader);
+	@Override
+	public void reset() {
+		this.messages.clear();
 	}
 	
 	@Override
@@ -71,12 +68,12 @@ public class ObservableOwl implements Observable {
 		if (this.getClass() != object.getClass())
 			return false;
 		ObservableOwl other = (ObservableOwl) object;
-		return this.observers == other.observers && this.messages == other.messages && this.readers == other.readers;
+		return this.observers == other.observers && this.messages == other.messages;
 	}
 	
 	@Override
 	public int hashCode() {
-		return Arrays.deepHashCode(new Object[]{this.observers, this.messages, this.readers});
+		return Arrays.deepHashCode(new Object[]{this.observers, this.messages});
 	}
 	
 	@Override
@@ -84,7 +81,6 @@ public class ObservableOwl implements Observable {
 		return "ObservableOwl{" +
 				"observers=" + this.observers +
 				", messages=" + this.messages +
-				", readers=" + Arrays.toString(this.readers) +
 				'}';
 	}
 }

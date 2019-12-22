@@ -20,6 +20,10 @@ public class ElementsGetter implements Resettable {
 		this(elementGetters, elementLengths, new ElementFormatter());
 	}
 	
+	public ElementsGetter(ElementGetter[] elementGetters) {
+		this(elementGetters, new IndexManipulator[]{}, new ElementFormatter());
+	}
+	
 	public String getElements() {
 		this.exceptionsHandle();
 		
