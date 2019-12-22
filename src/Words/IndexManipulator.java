@@ -1,4 +1,4 @@
-package Words.IndexManipulators;
+package Words;
 
 import Utils.RandomHolder;
 

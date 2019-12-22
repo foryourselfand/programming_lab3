@@ -5,10 +5,10 @@ import Utils.Breath;
 import Utils.Monitors.Monitor;
 import Utils.Monitors.MonitorPrint;
 import Utils.SequenceElementGetter;
-import Words.ConditionFilters.RandomFilter.RandomHalfFilter;
+import Words.ConditionFilters.ConditionFilter;
 import Words.ConditionFilters.SequenseFilters.LessFilters.LessOrEqualsFilter;
 import Words.*;
-import Words.IndexManipulators.IndexManipulator;
+import Words.IndexManipulator;
 
 import java.util.List;
 
@@ -31,7 +31,7 @@ public class Main {
 				ElementFillers.RUSSIAN.ALPHABET,
 				new IndexManipulator.Random(),
 				new ElementFormatter.Upper(new LessOrEqualsFilter(1)),
-				new ElementFormatter.Reverse(new RandomHalfFilter())
+				new ElementFormatter.Reverse(new ConditionFilter.RandomHalf())
 		);
 		ElementGetter endingGetter = new ElementGetter(
 				ElementFillers.SYMBOLS.DEFAULT

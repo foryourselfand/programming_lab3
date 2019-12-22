@@ -2,7 +2,6 @@ package Words;
 
 import Utils.RandomHolder;
 import Words.ConditionFilters.ConditionFilter;
-import Words.ConditionFilters.TrueFilter;
 
 public abstract class ElementFormatter {
 	private ConditionFilter conditionFilter;
@@ -12,7 +11,7 @@ public abstract class ElementFormatter {
 	}
 	
 	public ElementFormatter() {
-		this(new TrueFilter());
+		this(new ConditionFilter.True());
 	}
 	
 	public boolean getCondition(int index) {
@@ -105,7 +104,7 @@ public abstract class ElementFormatter {
 		}
 		
 		public Multiple(int multiplier) {
-			this(new TrueFilter(), multiplier);
+			this(new ConditionFilter.True(), multiplier);
 		}
 		
 		public Multiple(ConditionFilter conditionFilter) {
@@ -113,7 +112,7 @@ public abstract class ElementFormatter {
 		}
 		
 		public Multiple() {
-			this(new TrueFilter(), 1);
+			this(new ConditionFilter.True(), 1);
 		}
 		
 		@Override
@@ -136,7 +135,7 @@ public abstract class ElementFormatter {
 		}
 		
 		public MultiplyRandom(int bound) {
-			this(new TrueFilter(), bound);
+			this(new ConditionFilter.True(), bound);
 		}
 		
 		public MultiplyRandom(ConditionFilter conditionFilter) {
@@ -144,7 +143,7 @@ public abstract class ElementFormatter {
 		}
 		
 		public MultiplyRandom() {
-			this(new TrueFilter(), 1);
+			this(new ConditionFilter.True(), 1);
 		}
 		
 		@Override
@@ -163,7 +162,7 @@ public abstract class ElementFormatter {
 		}
 		
 		public Append(String elementAppended) {
-			this(new TrueFilter(), elementAppended);
+			this(new ConditionFilter.True(), elementAppended);
 		}
 		
 		public Append(ConditionFilter conditionFilter) {
@@ -171,7 +170,7 @@ public abstract class ElementFormatter {
 		}
 		
 		public Append() {
-			this(new TrueFilter(), "");
+			this(new ConditionFilter.True(), "");
 		}
 	}
 	

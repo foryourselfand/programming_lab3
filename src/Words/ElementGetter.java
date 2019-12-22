@@ -1,7 +1,5 @@
 package Words;
 
-import Words.IndexManipulators.IndexManipulator;
-
 public class ElementGetter {
 	private String[] elements;
 	private ElementFormatter[] elementFormatters;
