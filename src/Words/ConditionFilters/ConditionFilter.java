@@ -36,33 +36,33 @@ public abstract class ConditionFilter {
 		public boolean condition(int index) {
 			return randomCondition();
 		}
-	}
-	
-	public static class RandomWrapper extends Random {
-		private ConditionFilter conditionFilter;
 		
-		public RandomWrapper(float probability, ConditionFilter conditionFilter) {
-			super(probability);
-			this.conditionFilter = conditionFilter;
+		public static class Half extends Random {
+			public Half() {
+				super(0.5f);
+			}
 		}
 		
-		@Override
-		public boolean condition(int index) {
-			if (randomCondition())
-				return conditionFilter.condition(index);
-			return false;
+		public static class Wrapper extends Random {
+			private ConditionFilter conditionFilter;
+			
+			public Wrapper(float probability, ConditionFilter conditionFilter) {
+				super(probability);
+				this.conditionFilter = conditionFilter;
+			}
+			
+			@Override
+			public boolean condition(int index) {
+				if (randomCondition())
+					return conditionFilter.condition(index);
+				return false;
+			}
 		}
-	}
-	
-	public static class RandomHalf extends Random {
-		public RandomHalf() {
-			super(0.5f);
-		}
-	}
-	
-	public static class RandomHalfWrapper extends RandomWrapper {
-		public RandomHalfWrapper(ConditionFilter conditionFilter) {
-			super(0.5f, conditionFilter);
+		
+		public static class HalfWrapper extends Wrapper {
+			public HalfWrapper(ConditionFilter conditionFilter) {
+				super(0.5f, conditionFilter);
+			}
 		}
 	}
 	
@@ -74,153 +74,153 @@ public abstract class ConditionFilter {
 			this.mod = mod;
 			this.remainder = remainder;
 		}
-	}
-	
-	public static class RemainderOdd extends RemainderEqualsOne {
-		public RemainderOdd() {
-			super(2);
-		}
-	}
-	
-	public static class RemainderEven extends RemainderEqualsZero {
-		public RemainderEven() {
-			super(2);
-		}
-	}
-	
-	public static class RemainderEqualsNumber extends Remainder {
-		public RemainderEqualsNumber(int mod, int remainder) {
-			super(mod, remainder);
+		
+		public static class EqualsNumber extends Remainder {
+			public EqualsNumber(int mod, int remainder) {
+				super(mod, remainder);
+			}
+			
+			@Override
+			public boolean condition(int index) {
+				return (index % mod) == remainder;
+			}
 		}
 		
-		@Override
-		public boolean condition(int index) {
-			return (index % mod) == remainder;
-		}
-	}
-	
-	public static class RemainderNotEqualsNumber extends Remainder {
-		public RemainderNotEqualsNumber(int mod, int remainder) {
-			super(mod, remainder);
+		public static class NotEqualsNumber extends Remainder {
+			public NotEqualsNumber(int mod, int remainder) {
+				super(mod, remainder);
+			}
+			
+			@Override
+			public boolean condition(int index) {
+				return (index % mod) != remainder;
+			}
 		}
 		
-		@Override
-		public boolean condition(int index) {
-			return (index % mod) != remainder;
+		public static class EqualsOne extends EqualsNumber {
+			public EqualsOne(int mod) {
+				super(mod, 1);
+			}
+		}
+		
+		public static class EqualsZero extends EqualsNumber {
+			public EqualsZero(int mod) {
+				super(mod, 0);
+			}
+		}
+		
+		public static class Odd extends EqualsOne {
+			public Odd() {
+				super(2);
+			}
+		}
+		
+		public static class Even extends EqualsZero {
+			public Even() {
+				super(2);
+			}
 		}
 	}
 	
-	public static class RemainderEqualsOne extends RemainderEqualsNumber {
-		public RemainderEqualsOne(int mod) {
-			super(mod, 1);
-		}
-	}
 	
-	public static class RemainderEqualsZero extends RemainderEqualsNumber {
-		public RemainderEqualsZero(int mod) {
-			super(mod, 0);
-		}
-	}
-	
-	public static abstract class SequenceFilter extends ConditionFilter {
+	public static abstract class Sequence extends ConditionFilter {
 		protected int[] numbers;
 		
-		public SequenceFilter(int... numbers) {
+		public Sequence(int... numbers) {
 			if (numbers.length == 0)
 				throw new IllegalArgumentException();
 			this.numbers = numbers;
 			Arrays.sort(numbers);
 		}
-	}
-	
-	public static class NotEqualsFilter extends SequenceFilter {
-		public NotEqualsFilter(int... numbers) {
-			super(numbers);
+		
+		public static class Equals extends Sequence {
+			public Equals(int... numbers) {
+				super(numbers);
+			}
+			
+			@Override
+			public boolean condition(int index) {
+				for (int number : numbers)
+					if (number == index)
+						return true;
+				return false;
+			}
 		}
 		
-		@Override
-		public boolean condition(int index) {
-			for (int number : numbers)
-				if (number == index)
-					return false;
-			return true;
-		}
-	}
-	
-	public static class EqualsFilter extends SequenceFilter {
-		public EqualsFilter(int... numbers) {
-			super(numbers);
-		}
-		
-		@Override
-		public boolean condition(int index) {
-			for (int number : numbers)
-				if (number == index)
-					return true;
-			return false;
-		}
-	}
-	
-	public static abstract class MinFilter extends SequenceFilter {
-		protected int minNumber;
-		
-		public MinFilter(int... numbers) {
-			super(numbers);
-			minNumber = numbers[0];
-		}
-	}
-	
-	public static class LessOrEqualsFilter extends MinFilter {
-		public LessOrEqualsFilter(int... numbers) {
-			super(numbers);
+		public static class NotEquals extends Sequence {
+			public NotEquals(int... numbers) {
+				super(numbers);
+			}
+			
+			@Override
+			public boolean condition(int index) {
+				for (int number : numbers)
+					if (number == index)
+						return false;
+				return true;
+			}
 		}
 		
-		@Override
-		public boolean condition(int index) {
-			return index <= minNumber;
-		}
-	}
-	
-	public static class LessFilter extends MinFilter {
-		public LessFilter(int... numbers) {
-			super(numbers);
+		public static abstract class Min extends Sequence {
+			protected int minNumber;
+			
+			public Min(int... numbers) {
+				super(numbers);
+				minNumber = numbers[0];
+			}
 		}
 		
-		@Override
-		public boolean condition(int index) {
-			return index < minNumber;
-		}
-	}
-	
-	public static abstract class MaxFilter extends SequenceFilter {
-		protected int maxNumber;
-		
-		public MaxFilter(int... numbers) {
-			super(numbers);
-			maxNumber = numbers[numbers.length - 1];
-		}
-	}
-	
-	public static class GreaterFilter extends MaxFilter {
-		public GreaterFilter(int... numbers) {
-			super(numbers);
+		public static class LessOrEquals extends Min {
+			public LessOrEquals(int... numbers) {
+				super(numbers);
+			}
+			
+			@Override
+			public boolean condition(int index) {
+				return index <= minNumber;
+			}
 		}
 		
-		@Override
-		public boolean condition(int index) {
-			return index > maxNumber;
-		}
-	}
-	
-	public static class GreaterOrEqualsFilter extends MaxFilter {
-		public GreaterOrEqualsFilter(int... numbers) {
-			super(numbers);
+		public static class Less extends Min {
+			public Less(int... numbers) {
+				super(numbers);
+			}
+			
+			@Override
+			public boolean condition(int index) {
+				return index < minNumber;
+			}
 		}
 		
-		@Override
-		public boolean condition(int index) {
-			return index >= maxNumber;
+		public static abstract class Max extends Sequence {
+			protected int maxNumber;
+			
+			public Max(int... numbers) {
+				super(numbers);
+				maxNumber = numbers[numbers.length - 1];
+			}
+		}
+		
+		public static class Greater extends Max {
+			public Greater(int... numbers) {
+				super(numbers);
+			}
+			
+			@Override
+			public boolean condition(int index) {
+				return index > maxNumber;
+			}
+		}
+		
+		public static class GreaterOrEquals extends Max {
+			public GreaterOrEquals(int... numbers) {
+				super(numbers);
+			}
+			
+			@Override
+			public boolean condition(int index) {
+				return index >= maxNumber;
+			}
 		}
 	}
-	
 }

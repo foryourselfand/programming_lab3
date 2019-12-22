@@ -6,7 +6,6 @@ import Utils.Monitors.Monitor;
 import Utils.Monitors.MonitorPrint;
 import Utils.SequenceElementGetter;
 import Words.ConditionFilters.ConditionFilter;
-import Words.ConditionFilters.SequenseFilters.LessFilters.LessOrEqualsFilter;
 import Words.*;
 import Words.IndexManipulator;
 
@@ -30,8 +29,8 @@ public class Main {
 		ElementGetter wordGetter = new ElementGetter(
 				ElementFillers.RUSSIAN.ALPHABET,
 				new IndexManipulator.Random(),
-				new ElementFormatter.Upper(new LessOrEqualsFilter(1)),
-				new ElementFormatter.Reverse(new ConditionFilter.RandomHalf())
+				new ElementFormatter.Upper(new ConditionFilter.Sequence.LessOrEquals(1)),
+				new ElementFormatter.Reverse(new ConditionFilter.Random.Half())
 		);
 		ElementGetter endingGetter = new ElementGetter(
 				ElementFillers.SYMBOLS.DEFAULT
