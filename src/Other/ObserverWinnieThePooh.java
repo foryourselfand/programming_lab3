@@ -12,7 +12,6 @@ public final class ObserverWinnieThePooh implements Displayable {
 	public ObserverWinnieThePooh(Observable observable, Breath breath) {
 		this.observable = observable;
 		this.breath = breath;
-		this.breathe();
 	}
 	
 	public ObserverWinnieThePooh(Observable observable) {
@@ -21,11 +20,7 @@ public final class ObserverWinnieThePooh implements Displayable {
 	
 	@Override
 	public String getDisplayableMessage() {
-		return "Вздыхает: " + this.breath;
-	}
-	
-	public void breathe() {
-//		this.monitor.display(this);
+		return "Вздыхает: " + this.breath.getStrength();
 	}
 	
 	public class MonitorMessage implements Observer {
@@ -118,17 +113,22 @@ public final class ObserverWinnieThePooh implements Displayable {
 		@Override
 		public String getMessage() {
 			StringBuilder allStateBuilder = new StringBuilder("Последовательность ");
-			if (flags[0] && flags[2])
-				allStateBuilder.append("чередующаяся");
-			else if (flags[0] || flags[2]) {
-				if (flags[0])
+			
+			if (! flags[1]) {
+				if (flags[0] && ! flags[2])
 					allStateBuilder.append("убывающая");
-				else
+				else if (! flags[0] && flags[2])
 					allStateBuilder.append("возрастающая");
-				if (flags[1])
-					allStateBuilder.append(". С повторяющимися элементами");
-			} else if (flags[1])
-				allStateBuilder.append("монотонная");
+				else if (flags[0])
+					allStateBuilder.append("чередующаяся");
+			} else {
+				if (flags[0] || flags[2])
+					allStateBuilder.append("чередующаяся. C повторяющимися элементами");
+				else
+					allStateBuilder.append("монотонная");
+			}
+			
+			
 			allStateBuilder.append(".");
 			return allStateBuilder.toString();
 		}

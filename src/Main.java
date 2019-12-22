@@ -21,6 +21,7 @@ public class Main {
 		ObservableOwl observableOwl = new ObservableOwl(monitor);
 		
 		ObserverWinnieThePooh observerWinnieThePooh = new ObserverWinnieThePooh(observableOwl, Breath.STRONG);
+		monitor.display(observerWinnieThePooh);
 		
 		ObserverWinnieThePooh.MonitorMessage monitorMessage = observerWinnieThePooh.new MonitorMessage();
 		ObserverWinnieThePooh.Length length = observerWinnieThePooh.new Length();
@@ -38,7 +39,7 @@ public class Main {
 		);
 		
 		FullWordGetter fullWordGetter = new FullWordGetter(wordGetter, endingGetter);
-		SequenceElementGetter increasingSequence = new SequenceElementGetter.Increasing(5);
+		SequenceElementGetter increasingSequence = new SequenceElementGetter.Increasing(2, 1);
 		
 		WordsGetter wordsGetter = new WordsGetter(increasingSequence, fullWordGetter);
 		
