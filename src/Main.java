@@ -5,6 +5,8 @@ import Utils.Breath;
 import Utils.Monitors.Monitor;
 import Utils.Monitors.MonitorPrint;
 import Utils.SequenceElementGetter;
+import Words.Concrete.FullWordGetter;
+import Words.Concrete.WordsGetter;
 import Words.ConditionFilter;
 import Words.*;
 import Words.IndexManipulator;
@@ -25,6 +27,7 @@ public class Main {
 		ObserverWinnieThePooh.Length length = observerWinnieThePooh.new Length();
 		ObserverWinnieThePooh.Sequence sequence = observerWinnieThePooh.new Sequence();
 		ObserverWinnieThePooh.MonitorBlank monitorBlank = observerWinnieThePooh.new MonitorBlank();
+		List<Observer> observersOwl = observableOwl.getObservers();
 		
 		ElementGetter wordGetter = new ElementGetter(
 				ElementFiller.RUSSIAN.ALPHABET,
@@ -41,11 +44,10 @@ public class Main {
 		
 		WordsGetter wordsGetter = new WordsGetter(increasingSequence, fullWordGetter);
 		
-		List<Observer> observers = observableOwl.getObservers();
 		for (int i = 0; i < 10; i++) {
 			String fullWord = wordsGetter.getWord();
 			observableOwl.addMessage(fullWord);
-			for (Observer observer : observers)
+			for (Observer observer : observersOwl)
 				monitor.display(observer);
 		}
 		

@@ -1,4 +1,6 @@
-package Words;
+package Words.Concrete;
+
+import Words.ElementGetter;
 
 public class FullWordGetter {
 	private ElementGetter wordGetter;

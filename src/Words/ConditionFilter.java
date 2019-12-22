@@ -4,24 +4,24 @@ import Utils.RandomHolder;
 
 import java.util.Arrays;
 
-public abstract class ConditionFilter {
-	public abstract boolean condition(int index);
+public interface ConditionFilter {
+	boolean condition(int index);
 	
-	public static class True extends ConditionFilter {
+	class True implements ConditionFilter {
 		@Override
 		public boolean condition(int index) {
 			return true;
 		}
 	}
 	
-	public static class False extends ConditionFilter {
+	class False implements ConditionFilter {
 		@Override
 		public boolean condition(int index) {
 			return false;
 		}
 	}
 	
-	public static class Random extends ConditionFilter {
+	class Random implements ConditionFilter {
 		private float probability;
 		
 		public Random(float probability) {
@@ -66,7 +66,7 @@ public abstract class ConditionFilter {
 		}
 	}
 	
-	public static abstract class Remainder extends ConditionFilter {
+	abstract class Remainder implements ConditionFilter {
 		protected int mod;
 		protected int remainder;
 		
@@ -122,7 +122,7 @@ public abstract class ConditionFilter {
 		}
 	}
 	
-	public static abstract class Sequence extends ConditionFilter {
+	abstract class Sequence implements ConditionFilter {
 		protected int[] numbers;
 		
 		public Sequence(int... numbers) {

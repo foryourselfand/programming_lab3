@@ -1,4 +1,4 @@
-package Words;
+package Words.Concrete;
 
 import Utils.SequenceElementGetter;
 

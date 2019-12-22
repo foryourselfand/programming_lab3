@@ -10,7 +10,7 @@ public abstract class ElementFormatter {
 	}
 	
 	public ElementFormatter() {
-		this(new ConditionFilter.True());
+		this((index -> true));
 	}
 	
 	public boolean getCondition(int index) {
@@ -103,7 +103,7 @@ public abstract class ElementFormatter {
 		}
 		
 		public Multiple(int multiplier) {
-			this(new ConditionFilter.True(), multiplier);
+			this((index -> true), multiplier);
 		}
 		
 		public Multiple(ConditionFilter conditionFilter) {
@@ -111,7 +111,7 @@ public abstract class ElementFormatter {
 		}
 		
 		public Multiple() {
-			this(new ConditionFilter.True(), 1);
+			this((index -> true), 1);
 		}
 		
 		@Override
@@ -133,7 +133,7 @@ public abstract class ElementFormatter {
 			}
 			
 			public Random(int bound) {
-				this(new ConditionFilter.True(), bound);
+				this((index -> true), bound);
 			}
 			
 			public Random(ConditionFilter conditionFilter) {
@@ -141,7 +141,7 @@ public abstract class ElementFormatter {
 			}
 			
 			public Random() {
-				this(new ConditionFilter.True(), 1);
+				this((index -> true), 1);
 			}
 			
 			@Override
@@ -161,7 +161,7 @@ public abstract class ElementFormatter {
 		}
 		
 		public Append(String elementAppended) {
-			this(new ConditionFilter.True(), elementAppended);
+			this((index -> true), elementAppended);
 		}
 		
 		public Append(ConditionFilter conditionFilter) {
@@ -169,7 +169,7 @@ public abstract class ElementFormatter {
 		}
 		
 		public Append() {
-			this(new ConditionFilter.True(), "");
+			this((index -> true), "");
 		}
 		
 		public static class Before extends Append {
@@ -241,6 +241,4 @@ public abstract class ElementFormatter {
 			}
 		}
 	}
-	
-	
 }
