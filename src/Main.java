@@ -8,10 +8,9 @@ import Utils.RandomHolder;
 import Utils.SequenceElementGetter;
 import Words.Concrete.FullWordGetter;
 import Words.Concrete.WordsGetter;
-import Words.ConditionFilter;
 import Words.ElementFiller;
-import Words.ElementFormatter;
 import Words.ElementGetter;
+import Words.Holder;
 
 import java.util.List;
 
@@ -34,14 +33,8 @@ public class Main {
 		ElementGetter wordGetter = new ElementGetter(
 				ElementFiller.RUSSIAN.ALPHABET,
 				(index)->RandomHolder.getInstance().random.nextInt(index),
-				new ElementFormatter.Upper(new ConditionFilter() {
-					@Override
-					public boolean condition(int index) {
-						return index <= 1;
-					}
-				}),
-				new ElementFormatter.Reverse(index->0.5f <= RandomHolder.getInstance().random.nextFloat())
-		);
+				new Holder(String::toUpperCase, index->index <= 1),
+				new Holder(element->new StringBuilder(element).reverse().toString(), index->true));
 		ElementGetter endingGetter = new ElementGetter(
 				ElementFiller.SYMBOLS.DEFAULT
 		);
