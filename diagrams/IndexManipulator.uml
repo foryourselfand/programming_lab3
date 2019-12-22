@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>Words.IndexManipulator</OriginalElement>
+  <nodes>
+    <node x="10.5" y="387.5">Words.IndexManipulator.Random</node>
+    <node x="47.10714285714289" y="582.0">Words.IndexManipulator.Next</node>
+    <node x="759.5" y="310.0">Words.IndexManipulator.Sequence</node>
+    <node x="876.625" y="594.5">Words.IndexManipulator.Sequence.Increasing</node>
+    <node x="992.5" y="362.0">Words.IndexManipulator.Special</node>
+    <node x="420.25" y="582.0">Words.IndexManipulator.Previous</node>
+    <node x="565.5" y="387.5">Words.IndexManipulator.First</node>
+    <node x="1186.5" y="387.5">Words.IndexManipulator.Last</node>
+    <node x="204.5" y="336.0">Words.IndexManipulator.WithLast</node>
+    <node x="659.625" y="594.5">Words.IndexManipulator.Sequence.Decreasing</node>
+    <node x="562.0" y="0.0">Utils.Resettable</node>
+    <node x="526.0" y="117.0">Words.IndexManipulator</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="Words.IndexManipulator.Next" target="Words.IndexManipulator">
+      <point x="-43.5" y="-72.0" />
+      <point x="90.60714285714289" y="557.0" />
+      <point x="0.0" y="557.0" />
+      <point x="0.0" y="230.0" />
+      <point x="535.0357142857142" y="230.0" />
+      <point x="-117.46428571428578" y="46.5" />
+    </edge>
+    <edge source="Words.IndexManipulator" target="Utils.Resettable">
+      <point x="0.0" y="-46.5" />
+      <point x="0.0" y="33.5" />
+    </edge>
+    <edge source="Words.IndexManipulator.Sequence.Increasing" target="Words.IndexManipulator.Sequence">
+      <point x="48.0" y="-59.5" />
+      <point x="1020.625" y="557.0" />
+      <point x="945.875" y="557.0" />
+      <point x="79.875" y="111.0" />
+    </edge>
+    <edge source="Words.IndexManipulator.Random" target="Words.IndexManipulator">
+      <point x="-43.5" y="-33.5" />
+      <point x="54.0" y="240.0" />
+      <point x="553.1071428571429" y="240.0" />
+      <point x="-99.39285714285711" y="46.5" />
+    </edge>
+    <edge source="Words.IndexManipulator.First" target="Words.IndexManipulator">
+      <point x="-43.5" y="-33.5" />
+      <point x="609.0" y="290.0" />
+      <point x="643.4642857142858" y="290.0" />
+      <point x="-9.035714285714334" y="46.5" />
+    </edge>
+    <edge source="Words.IndexManipulator.WithLast" target="Words.IndexManipulator">
+      <point x="85.0" y="-85.0" />
+      <point x="459.5" y="270.0" />
+      <point x="607.3214285714287" y="270.0" />
+      <point x="-45.178571428571445" y="46.5" />
+    </edge>
+    <edge source="Words.IndexManipulator.Sequence.Decreasing" target="Words.IndexManipulator.Sequence">
+      <point x="49.25" y="-59.5" />
+      <point x="807.375" y="557.0" />
+      <point x="839.375" y="557.0" />
+      <point x="-26.625" y="111.0" />
+    </edge>
+    <edge source="Words.IndexManipulator.Next" target="Words.IndexManipulator.WithLast">
+      <point x="43.5" y="-72.0" />
+      <point x="177.6071428571429" y="557.0" />
+      <point x="289.5" y="557.0" />
+      <point x="-85.0" y="85.0" />
+    </edge>
+    <edge source="Words.IndexManipulator.Sequence" target="Words.IndexManipulator">
+      <point x="53.25" y="-111.0" />
+      <point x="919.25" y="270.0" />
+      <point x="697.6785714285716" y="270.0" />
+      <point x="45.178571428571445" y="46.5" />
+    </edge>
+    <edge source="Words.IndexManipulator.Previous" target="Words.IndexManipulator">
+      <point x="43.5" y="-72.0" />
+      <point x="550.75" y="557.0" />
+      <point x="555.0" y="557.0" />
+      <point x="555.0" y="280.0" />
+      <point x="625.3928571428571" y="280.0" />
+      <point x="-27.10714285714289" y="46.5" />
+    </edge>
+    <edge source="Words.IndexManipulator.Previous" target="Words.IndexManipulator.WithLast">
+      <point x="-43.5" y="-72.0" />
+      <point x="463.75" y="557.0" />
+      <point x="459.5" y="557.0" />
+      <point x="85.0" y="85.0" />
+    </edge>
+    <edge source="Words.IndexManipulator.Last" target="Words.IndexManipulator">
+      <point x="43.5" y="-33.5" />
+      <point x="1317.0" y="230.0" />
+      <point x="769.9642857142858" y="230.0" />
+      <point x="117.46428571428578" y="46.5" />
+    </edge>
+    <edge source="Words.IndexManipulator.Special" target="Words.IndexManipulator">
+      <point x="-43.5" y="-59.0" />
+      <point x="1036.0" y="260.0" />
+      <point x="715.75" y="260.0" />
+      <point x="63.25" y="46.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="680.5" y="363.0" />
+  <SelectedNodes>
+    <node>Words.IndexManipulator</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

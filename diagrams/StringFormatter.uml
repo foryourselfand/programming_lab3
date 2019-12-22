@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>Words.StringFormatter</OriginalElement>
+  <nodes>
+    <node x="0.0" y="205.5">Words.StringFormatter.Mirror</node>
+    <node x="1819.0386904761904" y="205.5">Words.StringFormatter.Default</node>
+    <node x="1001.0386904761904" y="205.5">Words.StringFormatter.Upper</node>
+    <node x="1314.0386904761904" y="192.5">Words.StringFormatter.Append</node>
+    <node x="1565.0" y="371.0">Words.StringFormatter.Append.Before</node>
+    <node x="625.9999999999999" y="167.0">Words.StringFormatter.Multiple</node>
+    <node x="1252.0" y="371.0">Words.StringFormatter.Append.After</node>
+    <node x="1506.0386904761904" y="205.5">Words.StringFormatter.Reverse</node>
+    <node x="625.9999999999999" y="371.0">Words.StringFormatter.Multiple.Random</node>
+    <node x="998.7083333333333" y="0.0">Words.StringFormatter</node>
+    <node x="938.9999999999999" y="371.0">Words.StringFormatter.Append.BeforeAndAfter</node>
+    <node x="312.9999999999999" y="205.5">Words.StringFormatter.Lower</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="Words.StringFormatter.Multiple.Random" target="Words.StringFormatter.Multiple">
+      <point x="-73.25" y="-72.0" />
+      <point x="-73.25" y="72.0" />
+    </edge>
+    <edge source="Words.StringFormatter.Append.Before" target="Words.StringFormatter.Append">
+      <point x="73.25" y="-72.0" />
+      <point x="1784.75" y="331.0" />
+      <point x="1471.705357142857" y="331.0" />
+      <point x="71.66666666666674" y="46.5" />
+    </edge>
+    <edge source="Words.StringFormatter.Reverse" target="Words.StringFormatter">
+      <point x="73.25" y="-33.5" />
+      <point x="1725.7886904761904" y="107.0" />
+      <point x="1239.3869047619046" y="107.0" />
+      <point x="94.17857142857133" y="33.5" />
+    </edge>
+    <edge source="Words.StringFormatter.Lower" target="Words.StringFormatter">
+      <point x="73.25" y="-33.5" />
+      <point x="532.7499999999999" y="117.0" />
+      <point x="1071.9583333333333" y="117.0" />
+      <point x="-73.25" y="33.5" />
+    </edge>
+    <edge source="Words.StringFormatter.Append" target="Words.StringFormatter">
+      <point x="43.0" y="-46.5" />
+      <point x="1443.0386904761904" y="127.0" />
+      <point x="1197.5297619047617" y="127.0" />
+      <point x="52.32142857142844" y="33.5" />
+    </edge>
+    <edge source="Words.StringFormatter.Default" target="Words.StringFormatter">
+      <point x="-73.25" y="-33.5" />
+      <point x="1892.2886904761904" y="97.0" />
+      <point x="1260.315476190476" y="97.0" />
+      <point x="115.10714285714266" y="33.5" />
+    </edge>
+    <edge source="Words.StringFormatter.Append.BeforeAndAfter" target="Words.StringFormatter.Append">
+      <point x="73.25" y="-72.0" />
+      <point x="1158.75" y="341.0" />
+      <point x="1357.0386904761904" y="341.0" />
+      <point x="-43.0" y="46.5" />
+    </edge>
+    <edge source="Words.StringFormatter.Mirror" target="Words.StringFormatter">
+      <point x="-73.25" y="-33.5" />
+      <point x="73.25" y="87.0" />
+      <point x="1009.172619047619" y="87.0" />
+      <point x="-136.03571428571422" y="33.5" />
+    </edge>
+    <edge source="Words.StringFormatter.Append.After" target="Words.StringFormatter.Append">
+      <point x="-73.25" y="-72.0" />
+      <point x="1325.25" y="351.0" />
+      <point x="1385.705357142857" y="351.0" />
+      <point x="-14.333333333333258" y="46.5" />
+    </edge>
+    <edge source="Words.StringFormatter.Upper" target="Words.StringFormatter">
+      <point x="-73.25" y="-33.5" />
+      <point x="1074.2886904761904" y="147.0" />
+      <point x="1134.7440476190475" y="147.0" />
+      <point x="-10.46428571428578" y="33.5" />
+    </edge>
+    <edge source="Words.StringFormatter.Multiple" target="Words.StringFormatter">
+      <point x="-73.25" y="-72.0" />
+      <point x="699.2499999999999" y="127.0" />
+      <point x="1092.8869047619046" y="127.0" />
+      <point x="-52.32142857142867" y="33.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.7566807313642757" x="1056.5" y="257.5" />
+  <SelectedNodes>
+    <node>Words.StringFormatter</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
