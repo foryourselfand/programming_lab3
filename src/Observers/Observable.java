@@ -1,4 +1,4 @@
-package Other;
+package Observers;
 
 public interface Observable {
 	void addObserver(Observer observer);

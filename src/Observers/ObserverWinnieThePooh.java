@@ -1,11 +1,11 @@
-package Other;
+package Observers;
 
 import Utils.Breath;
-import Utils.Displayable;
+import Utils.Printable;
 
 import java.util.HashMap;
 
-public final class ObserverWinnieThePooh implements Displayable {
+public final class ObserverWinnieThePooh implements Printable {
 	private Observable observable;
 	private Breath breath;
 	
@@ -19,7 +19,7 @@ public final class ObserverWinnieThePooh implements Displayable {
 	}
 	
 	@Override
-	public String getDisplayableMessage() {
+	public String getPrintableMessage() {
 		return "Вздыхает: " + this.breath.getStrength();
 	}
 	
@@ -31,7 +31,7 @@ public final class ObserverWinnieThePooh implements Displayable {
 		}
 		
 		@Override
-		public String getDisplayableMessage() {
+		public String getPrintableMessage() {
 			return "Сообщение: " + this.lastMessage;
 		}
 		
@@ -68,7 +68,7 @@ public final class ObserverWinnieThePooh implements Displayable {
 		}
 		
 		@Override
-		public String getDisplayableMessage() {
+		public String getPrintableMessage() {
 			if (previousPattern == 42)
 				return getMessageForFirstElementSituation();
 			return getMessage();
@@ -139,7 +139,7 @@ public final class ObserverWinnieThePooh implements Displayable {
 		}
 		
 		@Override
-		public String getDisplayableMessage() {
+		public String getPrintableMessage() {
 			return "";
 		}
 		

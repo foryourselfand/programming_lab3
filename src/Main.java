@@ -1,28 +1,23 @@
-import Other.ObservableOwl;
-import Other.Observer;
-import Other.ObserverWinnieThePooh;
+import Observers.ObservableOwl;
+import Observers.Observer;
+import Observers.ObserverWinnieThePooh;
 import Utils.Breath;
-import Utils.Monitors.Monitor;
-import Utils.Monitors.MonitorPrint;
+import Utils.Printers.Printer;
+import Utils.Printers.PrinterOut;
 import Utils.RandomHolder;
-import Utils.SequenceElementGetter;
-import Words.Concrete.FullWordGetter;
-import Words.Concrete.WordsGetter;
-import Words.ElementFiller;
-import Words.ElementFormatter;
-import Words.ElementGetter;
+import Words.*;
 
 import java.util.List;
 
 public class Main {
 	public static void main(String[] args) {
-		Monitor monitor = new MonitorPrint();
+		Printer printer = new PrinterOut();
 		
 		ObservableOwl observableOwl = new ObservableOwl();
 		
 		ObserverWinnieThePooh observerWinnieThePooh = new ObserverWinnieThePooh(observableOwl, Breath.STRONG);
-		monitor.display(observerWinnieThePooh);
-		monitor.display("");
+		printer.println(observerWinnieThePooh);
+		printer.println("");
 		
 		ObserverWinnieThePooh.MonitorMessage monitorMessage = observerWinnieThePooh.new MonitorMessage();
 		ObserverWinnieThePooh.Length length = observerWinnieThePooh.new Length();
@@ -30,42 +25,47 @@ public class Main {
 		ObserverWinnieThePooh.MonitorBlank monitorBlank = observerWinnieThePooh.new MonitorBlank();
 		List<Observer> observersOwl = observableOwl.getObservers();
 		
-		ElementGetter wordGetter = new ElementGetter(
+		
+		ElementGetter elementGetterStart = new ElementGetter(
 				ElementFiller.RUSSIAN.ALPHABET,
-				(index)->RandomHolder.getInstance().random.nextInt(index),
+				(int index)->RandomHolder.getInstance().random.nextInt(index),
 				new ElementFormatter(String::toUpperCase, index->index <= 1),
 				new ElementFormatter(element->new StringBuilder(element).reverse().toString(), index->true)
 		);
 		
-		ElementGetter endingGetter = new ElementGetter(
-				ElementFiller.SYMBOLS.DEFAULT,
-				new ElementFormatter(element->{
+		ElementGetter elementGetterEnd = new ElementGetter(
+				ElementFiller.SYMBOLS.DEFAULT/*,
+				new ElementFormatter(element->
+				{
 					StringBuilder stringBuilder = new StringBuilder(element);
 					int multiplier = RandomHolder.getInstance().random.nextInt(2) + 1;
 					for (int i = 0; i < multiplier; i++)
 						stringBuilder.append(")");
 					return stringBuilder.toString();
-				}, (index)->true)
+				}, (index)->true)*/
 		);
 		
-		FullWordGetter fullWordGetter = new FullWordGetter(wordGetter, endingGetter);
-		SequenceElementGetter increasingSequence = new SequenceElementGetter.Increasing(2, 1);
+		ElementsGetter wordGetter = new ElementsGetter(
+				new ElementGetter[]{elementGetterStart, elementGetterEnd},
+				new IndexManipulator[]{new IndexManipulator.Sequence.Increasing(1), index->1}
+		);
 		
-		WordsGetter wordsGetter = new WordsGetter(increasingSequence, fullWordGetter);
+		long seedStart = RandomHolder.getInstance().random.nextLong();
 		
+		RandomHolder.getInstance().random.setSeed(seedStart);
 		for (int i = 0; i < 10; i++) {
-			String fullWord = wordsGetter.getWord();
+			String fullWord = wordGetter.getElements();
 			observableOwl.addMessage(fullWord);
 			for (Observer observer : observersOwl)
-				monitor.display(observer);
+				printer.println(observer);
 		}
 		
 		String firstMessage = observableOwl.getFirstMessage();
 		String lastMessage = observableOwl.getLastMessage();
 		
-		monitor.display("Первое сообщение: " + firstMessage);
-		monitor.display("Последнее сообщение: " + lastMessage);
-		monitor.display("");
+		printer.println("Первое сообщение: " + firstMessage);
+		printer.println("Последнее сообщение: " + lastMessage);
+		printer.println("");
 		
 		observableOwl.announceReader();
 	}

@@ -1,4 +1,4 @@
-package Other;
+package Observers;
 
 import Utils.RandomHolder;
 

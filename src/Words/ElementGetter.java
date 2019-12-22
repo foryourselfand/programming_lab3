@@ -1,6 +1,8 @@
 package Words;
 
-public class ElementGetter {
+import Utils.Resettable;
+
+public class ElementGetter implements Resettable {
 	private String[] elements;
 	private ElementFormatter[] elementFormatters;
 	private IndexManipulator indexManipulator;
@@ -56,13 +58,14 @@ public class ElementGetter {
 	
 	public String getElement() {
 		element_index++;
-		String element = elements[indexManipulator.getIndex(elements.length)];
+		String element = elements[indexManipulator.getIndex(this.elements.length)];
 		for (ElementFormatter elementFormatter : elementFormatters)
 			if (elementFormatter.getConditionFilter().condition(element_index))
 				element = elementFormatter.getStringFormatter().getFormattedString(element);
 		return element;
 	}
 	
+	@Override
 	public void reset() {
 		element_index = 0;
 	}

@@ -6,12 +6,8 @@ public class RandomHolder {
 	private static RandomHolder instance;
 	public Random random;
 	
-	private RandomHolder(long seed) {
-		this.random = new Random(seed);
-	}
-	
 	private RandomHolder() {
-		this(new Random().nextLong());
+		this.random = new Random();
 	}
 	
 	public static RandomHolder getInstance() {
