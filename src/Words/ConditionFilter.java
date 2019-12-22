@@ -1,4 +1,4 @@
-package Words.ConditionFilters;
+package Words;
 
 import Utils.RandomHolder;
 
@@ -121,7 +121,6 @@ public abstract class ConditionFilter {
 			}
 		}
 	}
-	
 	
 	public static abstract class Sequence extends ConditionFilter {
 		protected int[] numbers;

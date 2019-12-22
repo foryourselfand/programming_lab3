@@ -1,7 +1,6 @@
 package Words;
 
 import Utils.RandomHolder;
-import Words.ConditionFilters.ConditionFilter;
 
 public abstract class ElementFormatter {
 	private ConditionFilter conditionFilter;
@@ -124,32 +123,32 @@ public abstract class ElementFormatter {
 				stringBuilder.append(elementInput);
 			return stringBuilder.toString();
 		}
-	}
-	
-	public static class MultiplyRandom extends Multiple {
-		private int bound;
 		
-		public MultiplyRandom(ConditionFilter conditionFilter, int bound) {
-			super(conditionFilter, 1);
-			this.bound = bound;
-		}
-		
-		public MultiplyRandom(int bound) {
-			this(new ConditionFilter.True(), bound);
-		}
-		
-		public MultiplyRandom(ConditionFilter conditionFilter) {
-			this(conditionFilter, 1);
-		}
-		
-		public MultiplyRandom() {
-			this(new ConditionFilter.True(), 1);
-		}
-		
-		@Override
-		public String getFormattedElement(String elementInput) {
-			multiplier = RandomHolder.getInstance().random.nextInt(bound) + 1;
-			return super.getFormattedElement(elementInput);
+		public static class Random extends Multiple {
+			private int bound;
+			
+			public Random(ConditionFilter conditionFilter, int bound) {
+				super(conditionFilter, 1);
+				this.bound = bound;
+			}
+			
+			public Random(int bound) {
+				this(new ConditionFilter.True(), bound);
+			}
+			
+			public Random(ConditionFilter conditionFilter) {
+				this(conditionFilter, 1);
+			}
+			
+			public Random() {
+				this(new ConditionFilter.True(), 1);
+			}
+			
+			@Override
+			public String getFormattedElement(String elementInput) {
+				multiplier = RandomHolder.getInstance().random.nextInt(bound) + 1;
+				return super.getFormattedElement(elementInput);
+			}
 		}
 	}
 	
@@ -172,74 +171,76 @@ public abstract class ElementFormatter {
 		public Append() {
 			this(new ConditionFilter.True(), "");
 		}
+		
+		public static class Before extends Append {
+			public Before(ConditionFilter conditionFilter, String elementAppended) {
+				super(conditionFilter, elementAppended);
+			}
+			
+			public Before(String elementAppended) {
+				super(elementAppended);
+			}
+			
+			public Before(ConditionFilter conditionFilter) {
+				super(conditionFilter);
+			}
+			
+			public Before() {
+				super();
+			}
+			
+			@Override
+			public String getFormattedElement(String elementInput) {
+				return elementAppended + elementInput;
+			}
+		}
+		
+		public static class After extends Append {
+			public After(ConditionFilter conditionFilter, String elementAppended) {
+				super(conditionFilter, elementAppended);
+			}
+			
+			public After(String elementAppended) {
+				super(elementAppended);
+			}
+			
+			public After(ConditionFilter conditionFilter) {
+				super(conditionFilter);
+			}
+			
+			public After() {
+				super();
+			}
+			
+			@Override
+			public String getFormattedElement(String elementInput) {
+				return elementInput + elementAppended;
+			}
+		}
+		
+		public static class BeforeAndAfter extends Append {
+			public BeforeAndAfter(ConditionFilter conditionFilter, String elementAppended) {
+				super(conditionFilter, elementAppended);
+			}
+			
+			public BeforeAndAfter(String elementAppended) {
+				super(elementAppended);
+			}
+			
+			public BeforeAndAfter(ConditionFilter conditionFilter) {
+				super(conditionFilter);
+			}
+			
+			public BeforeAndAfter() {
+				super();
+			}
+			
+			@Override
+			public String getFormattedElement(String elementInput) {
+				return elementAppended + elementInput + elementAppended;
+			}
+		}
 	}
 	
-	public static class AppendBefore extends Append {
-		public AppendBefore(ConditionFilter conditionFilter, String elementAppended) {
-			super(conditionFilter, elementAppended);
-		}
-		
-		public AppendBefore(String elementAppended) {
-			super(elementAppended);
-		}
-		
-		public AppendBefore(ConditionFilter conditionFilter) {
-			super(conditionFilter);
-		}
-		
-		public AppendBefore() {
-			super();
-		}
-		
-		@Override
-		public String getFormattedElement(String elementInput) {
-			return elementAppended + elementInput;
-		}
-	}
 	
-	public static class AppendAfter extends Append {
-		public AppendAfter(ConditionFilter conditionFilter, String elementAppended) {
-			super(conditionFilter, elementAppended);
-		}
-		
-		public AppendAfter(String elementAppended) {
-			super(elementAppended);
-		}
-		
-		public AppendAfter(ConditionFilter conditionFilter) {
-			super(conditionFilter);
-		}
-		
-		public AppendAfter() {
-			super();
-		}
-		
-		@Override
-		public String getFormattedElement(String elementInput) {
-			return elementInput + elementAppended;
-		}
-	}
-	
-	public static class AppendBeforeAndAfter extends Append {
-		public AppendBeforeAndAfter(ConditionFilter conditionFilter, String elementAppended) {
-			super(conditionFilter, elementAppended);
-		}
-		
-		public AppendBeforeAndAfter(String elementAppended) {
-			super(elementAppended);
-		}
-		
-		public AppendBeforeAndAfter(ConditionFilter conditionFilter) {
-			super(conditionFilter);
-		}
-		
-		public AppendBeforeAndAfter() {
-			super();
-		}
-		
-		@Override
-		public String getFormattedElement(String elementInput) {
-			return elementAppended + elementInput + elementAppended;
-		}
-	}
 }

@@ -5,7 +5,7 @@ import Utils.Breath;
 import Utils.Monitors.Monitor;
 import Utils.Monitors.MonitorPrint;
 import Utils.SequenceElementGetter;
-import Words.ConditionFilters.ConditionFilter;
+import Words.ConditionFilter;
 import Words.*;
 import Words.IndexManipulator;
 
@@ -27,13 +27,13 @@ public class Main {
 		ObserverWinnieThePooh.MonitorBlank monitorBlank = observerWinnieThePooh.new MonitorBlank();
 		
 		ElementGetter wordGetter = new ElementGetter(
-				ElementFillers.RUSSIAN.ALPHABET,
+				ElementFiller.RUSSIAN.ALPHABET,
 				new IndexManipulator.Random(),
 				new ElementFormatter.Upper(new ConditionFilter.Sequence.LessOrEquals(1)),
 				new ElementFormatter.Reverse(new ConditionFilter.Random.Half())
 		);
 		ElementGetter endingGetter = new ElementGetter(
-				ElementFillers.SYMBOLS.DEFAULT
+				ElementFiller.SYMBOLS.DEFAULT
 		);
 		
 		FullWordGetter fullWordGetter = new FullWordGetter(wordGetter, endingGetter);
