@@ -2,33 +2,33 @@ package Words;
 
 public class ElementGetter {
 	private String[] elements;
-	private Holder[] holders;
+	private ElementFormatter[] elementFormatters;
 	private IndexManipulator indexManipulator;
 	
 	private int element_index;
 	
-	public ElementGetter(String[] elements, IndexManipulator indexManipulator, Holder... holders) {
+	public ElementGetter(String[] elements, IndexManipulator indexManipulator, ElementFormatter... elementFormatters) {
 		this.elements = elements;
 		this.indexManipulator = indexManipulator;
-		this.holders = holders;
+		this.elementFormatters = elementFormatters;
 		
 		element_index = 0;
 	}
 	
-	public ElementGetter(String[] elements, Holder... holders) {
-		this(elements, new IndexManipulator.Random(), holders);
+	public ElementGetter(String[] elements, ElementFormatter... elementFormatters) {
+		this(elements, new IndexManipulator.Random(), elementFormatters);
 	}
 	
 	public ElementGetter(String[] elements, IndexManipulator indexManipulator) {
-		this(elements, indexManipulator, new Holder(element->element, index->true));
+		this(elements, indexManipulator, new ElementFormatter());
 	}
 	
 	public ElementGetter(String[] elements) {
-		this(elements, new IndexManipulator.Random(), new Holder(element->element, index->true));
+		this(elements, new IndexManipulator.Random(), new ElementFormatter());
 	}
 	
-	public ElementGetter(String[] elements, IndexManipulator.WithLast indexManipulatorWithLast, IndexManipulator indexManipulatorStart, Holder... holders) {
-		this(elements, indexManipulatorWithLast, holders);
+	public ElementGetter(String[] elements, IndexManipulator.WithLast indexManipulatorWithLast, IndexManipulator indexManipulatorStart, ElementFormatter... elementFormatters) {
+		this(elements, indexManipulatorWithLast, elementFormatters);
 		setStartIndexManipulator(indexManipulatorStart);
 	}
 	
@@ -37,8 +37,8 @@ public class ElementGetter {
 		setStartIndexManipulator(indexManipulatorStart);
 	}
 	
-	public ElementGetter(String[] elements, IndexManipulator.WithLast indexManipulatorWithLast, Holder... holders) {
-		this(elements, (IndexManipulator) indexManipulatorWithLast, holders);
+	public ElementGetter(String[] elements, IndexManipulator.WithLast indexManipulatorWithLast, ElementFormatter... elementFormatters) {
+		this(elements, (IndexManipulator) indexManipulatorWithLast, elementFormatters);
 		setStartIndexManipulator(new IndexManipulator.Random());
 	}
 	
@@ -57,9 +57,9 @@ public class ElementGetter {
 	public String getElement() {
 		element_index++;
 		String element = elements[indexManipulator.getIndex(elements.length)];
-		for (Holder holder : holders)
-			if (holder.getConditionFilter().condition(element_index))
-				element = holder.getStringFormatter().getFormattedString(element);
+		for (ElementFormatter elementFormatter : elementFormatters)
+			if (elementFormatter.getConditionFilter().condition(element_index))
+				element = elementFormatter.getStringFormatter().getFormattedString(element);
 		return element;
 	}
 	

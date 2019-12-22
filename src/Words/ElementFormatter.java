@@ -1,23 +1,23 @@
 package Words;
 
-public class Holder {
+public class ElementFormatter {
 	private StringFormatter stringFormatter;
 	private ConditionFilter conditionFilter;
 	
-	public Holder(StringFormatter stringFormatter, ConditionFilter conditionFilter) {
+	public ElementFormatter(StringFormatter stringFormatter, ConditionFilter conditionFilter) {
 		this.stringFormatter = stringFormatter;
 		this.conditionFilter = conditionFilter;
 	}
 	
-	public Holder(StringFormatter stringFormatter) {
+	public ElementFormatter(StringFormatter stringFormatter) {
 		this(stringFormatter, index->true);
 	}
 	
-	public Holder(ConditionFilter conditionFilter) {
+	public ElementFormatter(ConditionFilter conditionFilter) {
 		this(element->element, conditionFilter);
 	}
 	
-	public Holder() {
+	public ElementFormatter() {
 		this(element->element, index->true);
 	}
 	

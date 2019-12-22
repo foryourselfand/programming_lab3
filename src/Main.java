@@ -9,8 +9,8 @@ import Utils.SequenceElementGetter;
 import Words.Concrete.FullWordGetter;
 import Words.Concrete.WordsGetter;
 import Words.ElementFiller;
+import Words.ElementFormatter;
 import Words.ElementGetter;
-import Words.Holder;
 
 import java.util.List;
 
@@ -33,8 +33,8 @@ public class Main {
 		ElementGetter wordGetter = new ElementGetter(
 				ElementFiller.RUSSIAN.ALPHABET,
 				(index)->RandomHolder.getInstance().random.nextInt(index),
-				new Holder(String::toUpperCase, index->index <= 1),
-				new Holder(element->new StringBuilder(element).reverse().toString(), index->true));
+				new ElementFormatter(String::toUpperCase, index->true),
+				new ElementFormatter(element->new StringBuilder(element).reverse().toString(), index->true));
 		ElementGetter endingGetter = new ElementGetter(
 				ElementFiller.SYMBOLS.DEFAULT
 		);

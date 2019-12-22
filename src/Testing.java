@@ -1,10 +1,10 @@
-import Words.Holder;
+import Words.ElementFormatter;
 
 public class Testing {
 	public static void main(String[] args) {
-		Holder holder = new Holder(String::toUpperCase, (index->index <= 1));
-		if (holder.getConditionFilter().condition(0)) {
-			System.out.println(holder.getStringFormatter().getFormattedString("abc"));
+		ElementFormatter elementFormatter = new ElementFormatter(String::toUpperCase, (index->index <= 1));
+		if (elementFormatter.getConditionFilter().condition(0)) {
+			System.out.println(elementFormatter.getStringFormatter().getFormattedString("abc"));
 		}
 	}
 }
