@@ -34,8 +34,13 @@ public class Main {
 		ElementGetter wordGetter = new ElementGetter(
 				ElementFiller.RUSSIAN.ALPHABET,
 				(index)->RandomHolder.getInstance().random.nextInt(index),
-				new ElementFormatter.Upper(new ConditionFilter.Sequence.LessOrEquals(1)),
-				new ElementFormatter.Reverse(index -> 0.5f <= RandomHolder.getInstance().random.nextFloat())
+				new ElementFormatter.Upper(new ConditionFilter() {
+					@Override
+					public boolean condition(int index) {
+						return index <= 1;
+					}
+				}),
+				new ElementFormatter.Reverse(index->0.5f <= RandomHolder.getInstance().random.nextFloat())
 		);
 		ElementGetter endingGetter = new ElementGetter(
 				ElementFiller.SYMBOLS.DEFAULT
