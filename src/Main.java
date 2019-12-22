@@ -1,8 +1,8 @@
-import Utils.Monitors.Monitor;
-import Utils.Monitors.MonitorPrint;
 import Other.ObservableOwl;
 import Other.ObserverWinnieThePooh;
 import Utils.Breath;
+import Utils.Monitors.Monitor;
+import Utils.Monitors.MonitorPrint;
 import Utils.SequenceElementGetter;
 import Words.ConditionFilters.RandomFilter.RandomHalfFilter;
 import Words.ConditionFilters.SequenseFilters.LessFilters.LessOrEqualsFilter;
@@ -16,14 +16,16 @@ import Words.WordsGetter;
 
 public class Main {
 	public static void main(String[] args) {
-		ObservableOwl observableOwl = new ObservableOwl();
-		
 		Monitor monitor = new MonitorPrint();
 		
-		ObserverWinnieThePooh observerWinnieThePooh = new ObserverWinnieThePooh(observableOwl, Breath.STRONG, monitor);
-		ObserverWinnieThePooh.MonitorMessage monitorMessage = observerWinnieThePooh.new MonitorMessage(observableOwl);
-		ObserverWinnieThePooh.Length length = observerWinnieThePooh.new Length(observableOwl);
-		ObserverWinnieThePooh.Sequence sequence = observerWinnieThePooh.new Sequence(observableOwl);
+		ObservableOwl observableOwl = new ObservableOwl(monitor);
+		
+		ObserverWinnieThePooh observerWinnieThePooh = new ObserverWinnieThePooh(observableOwl, Breath.STRONG);
+		
+		ObserverWinnieThePooh.MonitorMessage monitorMessage = observerWinnieThePooh.new MonitorMessage();
+		ObserverWinnieThePooh.Length length = observerWinnieThePooh.new Length();
+		ObserverWinnieThePooh.Sequence sequence = observerWinnieThePooh.new Sequence();
+		ObserverWinnieThePooh.MonitorBlank monitorBlank = observerWinnieThePooh.new MonitorBlank();
 		
 		ElementGetter wordGetter = new ElementGetter(
 				ElementFillers.RUSSIAN_ALPHABET,
@@ -44,7 +46,6 @@ public class Main {
 			String fullWord = wordsGetter.getWord();
 			observableOwl.addMessage(fullWord);
 		}
-		monitor.display("");
 		
 		String firstMessage = observableOwl.getFirstMessage();
 		String lastMessage = observableOwl.getLastMessage();

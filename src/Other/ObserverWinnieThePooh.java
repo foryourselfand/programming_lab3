@@ -2,108 +2,56 @@ package Other;
 
 import Utils.Breath;
 import Utils.Displayable;
-import Utils.Monitors.Monitor;
-import Utils.Monitors.MonitorPrint;
 
-import java.util.Arrays;
 import java.util.HashMap;
 
-public final class ObserverWinnieThePooh implements Observer, Displayable {
-	private Monitor monitor;
-	private String lastMessage;
+public final class ObserverWinnieThePooh implements Displayable {
+	private Observable observable;
 	private Breath breath;
-	private Displayable displayableBreath;
 	
-	public ObserverWinnieThePooh(Observable observable, Breath breath, Monitor monitor) {
-		observable.addObserver(this);
+	public ObserverWinnieThePooh(Observable observable, Breath breath) {
+		this.observable = observable;
 		this.breath = breath;
-		this.monitor = monitor;
-		this.displayableBreath = new DisplayableBreath();
 		this.breathe();
 	}
 	
-	public ObserverWinnieThePooh(Observable observable, Breath breath) {
-		this(observable, breath, new MonitorPrint());
-	}
-	
-	public ObserverWinnieThePooh(Observable observable, Monitor monitor) {
-		this(observable, Breath.STRONG, monitor);
-	}
-	
 	public ObserverWinnieThePooh(Observable observable) {
-		this(observable, Breath.STRONG, new MonitorPrint());
+		this(observable, Breath.STRONG);
 	}
 	
 	@Override
 	public String getDisplayableMessage() {
-		return "";
-	}
-	
-	@Override
-	public void update(String message) {
-		this.lastMessage = message;
-		monitor.display(this);
+		return "Вздыхает: " + this.breath;
 	}
 	
 	public void breathe() {
-		this.monitor.display(this.displayableBreath);
+//		this.monitor.display(this);
 	}
 	
-	@Override
-	public boolean equals(Object object) {
-		if (this == object)
-			return true;
-		if (object == null)
-			return false;
-		if (this.getClass() != object.getClass())
-			return false;
-		ObserverWinnieThePooh observerWinnieThePooh = (ObserverWinnieThePooh) object;
-		return this.lastMessage.equals(observerWinnieThePooh.lastMessage) && this.monitor == observerWinnieThePooh.monitor && this.breath == observerWinnieThePooh.breath;
-	}
-	
-	@Override
-	public int hashCode() {
-		return Arrays.deepHashCode(new Object[]{lastMessage, monitor, breath});
-	}
-	
-	@Override
-	public String toString() {
-		return "Him{" +
-				"lastMessage='" + lastMessage + '\'' +
-				", display=" + monitor +
-				", breath=" + breath +
-				'}';
-	}
-	
-	private class DisplayableBreath implements Displayable {
-		@Override
-		public String getDisplayableMessage() {
-			return "Вздыхает: " + breath.getStrength();
-		}
-	}
-	
-	public class MonitorMessage implements Observer, Displayable {
-		public MonitorMessage(Observable observable) {
+	public class MonitorMessage implements Observer {
+		private String lastMessage;
+		
+		public MonitorMessage() {
 			observable.addObserver(this);
 		}
 		
 		@Override
-		public void update(String message) {
-			monitor.display(this);
+		public String getDisplayableMessage() {
+			return "Сообщение: " + this.lastMessage;
 		}
 		
 		@Override
-		public String getDisplayableMessage() {
-			return "Сообщение: " + lastMessage;
+		public void update(String message) {
+			this.lastMessage = message;
 		}
 	}
 	
-	private abstract class FlagsHolder implements Observer, Displayable {
+	private abstract class Comparator implements Observer {
 		protected boolean[] flags;
 		protected int previousPattern;
 		private int previousLength;
 		
-		public FlagsHolder(Observable observable) {
+		public Comparator() {
 			observable.addObserver(this);
 			
 			flags = new boolean[3];
@@ -122,8 +70,6 @@ public final class ObserverWinnieThePooh implements Observer, Displayable {
 			}
 			
 			previousLength = currentLength;
-			
-			monitor.display(this);
 		}
 		
 		@Override
@@ -138,12 +84,11 @@ public final class ObserverWinnieThePooh implements Observer, Displayable {
 		public abstract String getMessage();
 	}
 	
-	public class Length extends FlagsHolder {
+	public class Length extends Comparator {
 		private HashMap<Integer, String> patternToName;
 		
-		public Length(Observable observable) {
-			super(observable);
-			
+		public Length() {
+			super();
 			patternToName = new HashMap<>();
 			patternToName.put(- 1, "меньше предыдущего");
 			patternToName.put(0, "равен предыдущему");
@@ -164,11 +109,7 @@ public final class ObserverWinnieThePooh implements Observer, Displayable {
 		}
 	}
 	
-	public class Sequence extends FlagsHolder {
-		public Sequence(Observable observable) {
-			super(observable);
-		}
-		
+	public class Sequence extends Comparator {
 		@Override
 		public String getMessageForFirstElementSituation() {
 			return "Последовательность из единственного элемента.";
@@ -190,6 +131,21 @@ public final class ObserverWinnieThePooh implements Observer, Displayable {
 				allStateBuilder.append("монотонная");
 			allStateBuilder.append(".");
 			return allStateBuilder.toString();
+		}
+	}
+	
+	public class MonitorBlank implements Observer {
+		public MonitorBlank() {
+			observable.addObserver(this);
+		}
+		
+		@Override
+		public String getDisplayableMessage() {
+			return "";
+		}
+		
+		@Override
+		public void update(String message) {
 		}
 	}
 }
