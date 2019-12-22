@@ -1,5 +1,8 @@
 package Words;
 
+import Utils.Exceptions.LengthGreaterException;
+import Utils.Exceptions.LengthLessException;
+import Utils.Exceptions.LengthZeroException;
 import Utils.Resettable;
 
 public class ElementsGetter implements Resettable {
@@ -18,7 +21,7 @@ public class ElementsGetter implements Resettable {
 	}
 	
 	public String getElements() {
-		assert this.elementGetters.length == this.elementLengths.length && this.elementGetters.length != 0;
+		this.exceptionsHandling();
 		
 		StringBuilder elementsBuilder = new StringBuilder();
 		for (int index = 0; index < this.elementGetters.length; index++) {
@@ -41,6 +44,43 @@ public class ElementsGetter implements Resettable {
 		for (int index = 0; index < elementGetters.length; index++) {
 			elementGetters[index].reset();
 			elementLengths[index].reset();
+		}
+	}
+	
+	public void checkExceptions() throws LengthZeroException, LengthGreaterException, LengthLessException {
+		if (this.elementGetters.length == 0)
+			throw new LengthZeroException();
+		if (this.elementLengths.length > this.elementGetters.length)
+			throw new LengthGreaterException();
+		if (this.elementLengths.length < this.elementGetters.length)
+			throw new LengthLessException();
+	}
+	
+	public void exceptionsHandling() {
+		try {
+			this.checkExceptions();
+		} catch (LengthZeroException e) {
+			e.printStackTrace();
+			System.exit(42);
+		} catch (LengthGreaterException e) {
+			int lengthRequired = elementGetters.length;
+			
+			IndexManipulator[] elementLengthsRequired = new IndexManipulator[lengthRequired];
+			System.arraycopy(this.elementLengths, 0, elementLengthsRequired, 0, lengthRequired);
+			
+			this.elementLengths = elementLengthsRequired;
+			
+		} catch (LengthLessException e) {
+			int lengthCurrent = elementLengths.length;
+			int lengthRequired = elementGetters.length;
+			
+			IndexManipulator[] elementLengthsRequired = new IndexManipulator[lengthRequired];
+			
+			System.arraycopy(this.elementLengths, 0, elementLengthsRequired, 0, lengthCurrent);
+			for (int elementLengthIndex = lengthCurrent; elementLengthIndex < lengthRequired; elementLengthIndex++)
+				elementLengthsRequired[elementLengthIndex] = new IndexManipulator.Special(1);
+			
+			this.elementLengths = elementLengthsRequired;
 		}
 	}
 }

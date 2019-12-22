@@ -47,8 +47,7 @@ public class Main {
 		
 		ElementsGetter wordGetter = new ElementsGetter(
 				new ElementGetter[]{elementGetterStart, elementGetterEnd},
-				new IndexManipulator[]{new IndexManipulator.Sequence.Increasing(1), index->1},
-				new ElementFormatter(new StringFormatter.Reverse())
+				new IndexManipulator[]{new IndexManipulator.Sequence.Increasing(1)}
 		);
 		
 		long seedStart = RandomHolder.getInstance().random.nextLong();
