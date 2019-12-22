@@ -59,7 +59,7 @@ public class ElementGetter {
 		String element = elements[indexManipulator.getIndex(elements.length)];
 		for (Holder holder : holders)
 			if (holder.getConditionFilter().condition(element_index))
-				element = holder.getElementFormatterSimple().getFormattedElement(element);
+				element = holder.getStringFormatter().getFormattedString(element);
 		return element;
 	}
 	

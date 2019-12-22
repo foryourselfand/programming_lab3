@@ -1,16 +1,16 @@
 package Words;
 
 public class Holder {
+	private StringFormatter stringFormatter;
 	private ConditionFilter conditionFilter;
-	private ElementFormatterSimple elementFormatterSimple;
 	
-	public Holder(ElementFormatterSimple elementFormatterSimple, ConditionFilter conditionFilter) {
-		this.elementFormatterSimple = elementFormatterSimple;
+	public Holder(StringFormatter stringFormatter, ConditionFilter conditionFilter) {
+		this.stringFormatter = stringFormatter;
 		this.conditionFilter = conditionFilter;
 	}
 	
-	public Holder(ElementFormatterSimple elementFormatterSimple) {
-		this(elementFormatterSimple, index->true);
+	public Holder(StringFormatter stringFormatter) {
+		this(stringFormatter, index->true);
 	}
 	
 	public Holder(ConditionFilter conditionFilter) {
@@ -21,11 +21,11 @@ public class Holder {
 		this(element->element, index->true);
 	}
 	
-	public ConditionFilter getConditionFilter() {
-		return conditionFilter;
+	public StringFormatter getStringFormatter() {
+		return stringFormatter;
 	}
 	
-	public ElementFormatterSimple getElementFormatterSimple() {
-		return elementFormatterSimple;
+	public ConditionFilter getConditionFilter() {
+		return conditionFilter;
 	}
 }
