@@ -1,6 +1,5 @@
 package Words;
 
-import Words.ElementFormatters.DefaultElementFormatter;
 import Words.ElementFormatters.ElementFormatter;
 import Words.IndexManipulators.IndexManipulator;
 import Words.IndexManipulators.IndexWithLastManipulators.IndexWithLastManipulator;
@@ -26,11 +25,11 @@ public class ElementGetter {
 	}
 	
 	public ElementGetter(String[] elements, IndexManipulator indexManipulator) {
-		this(elements, indexManipulator, new DefaultElementFormatter());
+		this(elements, indexManipulator, new ElementFormatter.Default());
 	}
 	
 	public ElementGetter(String[] elements) {
-		this(elements, new RandomIndexManipulator(), new DefaultElementFormatter());
+		this(elements, new RandomIndexManipulator(), new ElementFormatter.Default());
 	}
 	
 	public ElementGetter(String[] elements, IndexWithLastManipulator indexWithLastManipulator, IndexManipulator startIndexManipulator, ElementFormatter... elementFormatters) {

@@ -128,7 +128,6 @@ public final class ObserverWinnieThePooh implements Displayable {
 					allStateBuilder.append("монотонная");
 			}
 			
-			
 			allStateBuilder.append(".");
 			return allStateBuilder.toString();
 		}

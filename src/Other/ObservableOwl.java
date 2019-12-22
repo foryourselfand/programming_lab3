@@ -1,7 +1,5 @@
 package Other;
 
-import Utils.Monitors.Monitor;
-import Utils.Monitors.MonitorPrint;
 import Utils.RandomHolder;
 
 import java.util.Arrays;
@@ -12,26 +10,16 @@ public class ObservableOwl implements Observable {
 	private List<Observer> observers;
 	private List<String> messages;
 	private String[] readers;
-	private Monitor monitor;
 	
-	public ObservableOwl(String[] readers, Monitor monitor) {
+	public ObservableOwl(String[] readers) {
 		this.readers = readers;
-		this.monitor = monitor;
 		
 		this.observers = new LinkedList<>();
 		this.messages = new LinkedList<>();
 	}
 	
-	public ObservableOwl(String[] readers) {
-		this(readers, new MonitorPrint());
-	}
-	
-	public ObservableOwl(Monitor monitor) {
-		this(new String[]{"Кристофер Робин"}, monitor);
-	}
-	
 	public ObservableOwl() {
-		this(new String[]{"Кристофер Робин"}, new MonitorPrint());
+		this(new String[]{"Кристофер Робин"});
 	}
 	
 	@Override
@@ -49,8 +37,11 @@ public class ObservableOwl implements Observable {
 		String lastMessage = this.getLastMessage();
 		for (Observer observer : this.observers) {
 			observer.update(lastMessage);
-			this.monitor.display(observer);
 		}
+	}
+	
+	public List<Observer> getObservers() {
+		return observers;
 	}
 	
 	public void addMessage(String message) {
