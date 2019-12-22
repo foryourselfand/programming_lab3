@@ -21,7 +21,7 @@ public class ElementsGetter implements Resettable {
 	}
 	
 	public String getElements() {
-		this.exceptionsHandling();
+		this.exceptionsHandle();
 		
 		StringBuilder elementsBuilder = new StringBuilder();
 		for (int index = 0; index < this.elementGetters.length; index++) {
@@ -47,7 +47,7 @@ public class ElementsGetter implements Resettable {
 		}
 	}
 	
-	public void checkExceptions() throws LengthZeroException, LengthGreaterException, LengthLessException {
+	private void exceptionsCause() throws LengthZeroException, LengthGreaterException, LengthLessException {
 		if (this.elementGetters.length == 0)
 			throw new LengthZeroException();
 		if (this.elementLengths.length > this.elementGetters.length)
@@ -56,9 +56,9 @@ public class ElementsGetter implements Resettable {
 			throw new LengthLessException();
 	}
 	
-	public void exceptionsHandling() {
+	private void exceptionsHandle() {
 		try {
-			this.checkExceptions();
+			this.exceptionsCause();
 		} catch (LengthZeroException e) {
 			e.printStackTrace();
 			System.exit(42);

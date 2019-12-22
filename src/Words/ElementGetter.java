@@ -1,5 +1,6 @@
 package Words;
 
+import Utils.Exceptions.WrongIndexManipulatorStart;
 import Utils.Resettable;
 
 public class ElementGetter implements Resettable {
@@ -50,9 +51,27 @@ public class ElementGetter implements Resettable {
 	}
 	
 	public void setStartIndexManipulator(IndexManipulator indexManipulatorStart) {
-		if (indexManipulator instanceof IndexManipulator.WithLast) {
-			IndexManipulator.WithLast indexWithLastManipulator = (IndexManipulator.WithLast) indexManipulator;
-			indexWithLastManipulator.setLastIndex(indexManipulatorStart, elements.length);
+		IndexManipulator indexManipulatorStartNew = this.getIndexManipulatorStartHandle(indexManipulatorStart);
+		
+		IndexManipulator.WithLast indexManipulatorWithLast = (IndexManipulator.WithLast) this.indexManipulator;
+		indexManipulatorWithLast.setLastIndex(indexManipulatorStartNew, elements.length);
+		this.indexManipulator = indexManipulatorWithLast;
+	}
+	
+	private IndexManipulator getIndexManipulatorStartCause(IndexManipulator indexManipulatorStart) {
+		if (indexManipulatorStart instanceof IndexManipulator.WithLast)
+			throw new WrongIndexManipulatorStart();
+		return indexManipulatorStart;
+	}
+	
+	private IndexManipulator getIndexManipulatorStartHandle(IndexManipulator indexManipulatorStart) {
+		try {
+			return this.getIndexManipulatorStartCause(indexManipulatorStart);
+		} catch (WrongIndexManipulatorStart e) {
+			if (indexManipulatorStart instanceof IndexManipulator.Next)
+				return new IndexManipulator.First();
+			else
+				return new IndexManipulator.Last();
 		}
 	}
 	
